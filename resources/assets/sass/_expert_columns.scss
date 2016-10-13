@@ -1,0 +1,46 @@
+.expert-block {
+    padding: 0 0 15px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px dotted #c0bfbf;
+
+    .column-thumbnail {
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: top;
+
+        img {
+            height: 140px;
+            width: 210px;
+        }
+    }
+
+    .info-block {
+        display: inline-block;
+        width: 73%;
+        font-size: 13px;
+
+        .expert-title {
+            font-size: 20px;
+            font-weight: bolder;
+
+        }
+
+        .publisher {
+            margin-right: 10px;
+        }
+
+        .preview {
+            overflow: hidden;
+
+        }
+
+        .read-article {
+            margin: 0 !important;
+
+        }
+    }
+}
+
+.pages {
+    text-align: center;
+}

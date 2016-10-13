@@ -1,0 +1,113 @@
+.article-text, .article-body {
+  padding: 0 !important; }
+
+.content-head {
+  padding: 20px 10px !important; }
+
+#fgi-app {
+  font-size: 14px;
+  background: #EDECED;
+  padding: 15px; }
+  #fgi-app .fgi-button {
+    font-size: 14px;
+    color: #FFF;
+    background: #589F16;
+    border: none;
+    padding: 5px 15px; }
+  #fgi-app .make-block {
+    display: block; }
+  #fgi-app #fgi-app-right {
+    width: 49%;
+    display: inline-block; }
+    #fgi-app #fgi-app-right #fgi-filter-bar {
+      overflow: auto;
+      background: #D5D5D5;
+      padding: 15px;
+      border: 1px solid #979797;
+      color: #393939; }
+      #fgi-app #fgi-app-right #fgi-filter-bar .pull-left {
+        padding: 0px 50px 33px 0px; }
+      #fgi-app #fgi-app-right #fgi-filter-bar .form-wrap {
+        padding: 11px 0px; }
+        #fgi-app #fgi-app-right #fgi-filter-bar .form-wrap label {
+          padding-right: 19px;
+          font-weight: 300; }
+        #fgi-app #fgi-app-right #fgi-filter-bar .form-wrap input {
+          padding-left: 10px;
+          width: 99px;
+          height: 30px;
+          border: 1px solid #979797; }
+      #fgi-app #fgi-app-right #fgi-filter-bar .disclaimer {
+        clear: left;
+        display: block;
+        float: left;
+        font-size: 12px; }
+      #fgi-app #fgi-app-right #fgi-filter-bar .fgi-button {
+        float: right; }
+    #fgi-app #fgi-app-right #fgi-combined-stats-wrap {
+      padding: 15px;
+      padding-top: 25px;
+      border: 1px solid #979797;
+      margin-top: 20px; }
+      #fgi-app #fgi-app-right #fgi-combined-stats-wrap .combined-stat {
+        display: inline-block;
+        height: 26px;
+        width: 49%; }
+        #fgi-app #fgi-app-right #fgi-combined-stats-wrap .combined-stat .stat-title {
+          float: left;
+          font-size: 12px; }
+        #fgi-app #fgi-app-right #fgi-combined-stats-wrap .combined-stat .stat-value {
+          float: right;
+          padding-right: 20px;
+          color: #999999;
+          font-size: 12px; }
+    #fgi-app #fgi-app-right #fgi-player-list {
+      margin-top: 20px; }
+      #fgi-app #fgi-app-right #fgi-player-list table {
+        background: #FFF;
+        width: 100%;
+        border: 1px solid #979797; }
+        #fgi-app #fgi-app-right #fgi-player-list table thead {
+          border-bottom: 1px solid #979797; }
+        #fgi-app #fgi-app-right #fgi-player-list table tr th {
+          padding: 15px 6px;
+          font-weight: 500;
+          font-size: 12px; }
+        #fgi-app #fgi-app-right #fgi-player-list table tr td {
+          padding: 15px 6px;
+          border-bottom: 1px solid gray;
+          font-size: 12px; }
+          #fgi-app #fgi-app-right #fgi-player-list table tr td.center {
+            text-align: center; }
+  #fgi-app #fgi-app-left {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 15px; }
+    #fgi-app #fgi-app-left .fgi-heading {
+      font-size: 18px;
+      color: #8D8D8D; }
+    #fgi-app #fgi-app-left #fgi-lineups {
+      margin-top: 20px; }
+      #fgi-app #fgi-app-left #fgi-lineups table {
+        background: #FFF;
+        width: 100%;
+        border: 1px solid #979797; }
+        #fgi-app #fgi-app-left #fgi-lineups table thead {
+          border-bottom: 1px solid #979797; }
+        #fgi-app #fgi-app-left #fgi-lineups table tr th {
+          padding: 15px 6px;
+          font-weight: 500;
+          font-size: 12px; }
+        #fgi-app #fgi-app-left #fgi-lineups table tr td {
+          padding: 15px 6px;
+          border-bottom: 1px solid gray;
+          font-size: 12px; }
+          #fgi-app #fgi-app-left #fgi-lineups table tr td.center {
+            text-align: center; }
+          #fgi-app #fgi-app-left #fgi-lineups table tr td.a-gentle-nudge {
+            background: #EDECED;
+            border: none;
+            text-align: center; }
+
+/*# sourceMappingURL=lineup.css.map */

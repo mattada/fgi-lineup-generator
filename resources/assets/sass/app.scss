@@ -1,0 +1,162 @@
+
+@import "normalize";
+@import "general";
+@import "navigation";
+@import "content";
+@import "responsiveness";
+@import "stackable";
+@import "detail";
+
+
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//--- App Imports
+@import "welcome";
+@import "helpers";
+@import "ticker";
+@import "colors";
+@import "login_register";
+@import "article";
+@import "expert_columns";
+
+.cke_textarea_inline{
+    padding:20px;
+}
+
+//--- App
+.logo-header {
+    background: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.background {
+    background-image: url("/images/agusta.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+}
+
+#content .container {
+    width: 1220px;
+
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+}
+
+.footer {
+    position: relative;
+    height: 90px;
+    width: 100%;
+    background: white;
+    text-align: center;
+
+    .navigation {
+        display: inline-block;
+        background: white;
+        margin-top: 25px;
+        float: right;
+    }
+
+    .logo {
+        float: left;
+        margin-top: 17px;
+    }
+}
+
+#pgaToolsDropdown {
+    color: #9d9d9d;
+
+}
+
+hr{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ccc;
+
+}
+
+#loginButton {
+    text-decoration: none;
+    padding: 15px;
+
+}
+
+#registerButton {
+    text-decoration: none;
+    padding: 15px;
+}
+
+.modal {
+
+    .modal-content {
+        border-radius: 0;
+
+        .modal-header {
+            border-bottom: 0;
+
+        }
+
+        .modal-footer {
+            border-top: 0;
+
+        }
+
+    }
+
+    button {
+        border-radius: 0;
+    }
+
+}
+
+.btn-golf-green {
+    background: $golf-green;
+    color: white;
+    border-color: $golf-green;
+    border-radius: 0;
+
+    &:hover {
+        background: #378213;
+        color: white;
+    }
+
+}
+
+#cointent_lightbox.cointent_signup {
+    min-height: 630px !important;
+}
+
+.active_ctnr.active {
+    height: 450px !important;
+}
+
+#JSLRNav {
+    display: none;
+}
+
+.data-group.full_page {
+    padding: 20px;
+}
+
+#pageSearch {
+    display: inline-block;
+    margin: 18px;
+    width: 50%;
+
+    input[name=search] {
+        width: 80%;
+    }
+
+    input[type=submit] {
+        padding: 5px 10px;
+        border: solid 1px #6D6D6D;
+        color: #6D6D6D;
+        font-size: 12px;
+        background: none;
+    }
+}

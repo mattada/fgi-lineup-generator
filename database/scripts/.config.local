@@ -1,0 +1,10 @@
+#!/bin/bash
+
+export MYSQL_BIN="/C/Program Files/MySQL/MySQL Server 5.6/bin"
+
+export DB_HOST="localhost"
+export DB_NAME="fantasygolfbuilder"
+export DB_USER="fgbuilder"
+export DB_PASSWORD="fgbuilder"
+
+export BASE_SYSTEM_DIR="/C/hostroot/__FACTOR1_Projects/FantasyGolfLineupBuilder"

@@ -1,0 +1,33 @@
+#loginForm {
+    border-radius: 0;
+
+}
+
+#registerForm {
+    border-radius: 0;
+
+}
+
+.premium-content-block {
+    text-align: center;
+    margin: 50px;
+
+    .access-instructions {
+        font-size: 25px;
+        margin-bottom: 20px;
+
+    }
+
+    .premium-login {
+        margin-right: 10px;
+        width: 100px;
+
+    }
+
+    .premium-register {
+        margin-left: 10px;
+        width: 100px;
+
+    }
+
+}

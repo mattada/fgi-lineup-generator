@@ -1,0 +1,24 @@
+{
+  "name": "Fantasy Golf Insider",
+  "description": "Private FGI repository",
+  "author": "ActiveLogic Labs, Llc.",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "stacktable.js": "stackable.js#^1.0.1",
+    "dropzone": "^4.3.0"
+  },
+  "authors": [
+    "Robert Kehoe <robert@activelogiclabs.com>"
+  ],
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ]
+}

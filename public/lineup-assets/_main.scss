@@ -1,0 +1,149 @@
+.article-text,.article-body{
+	padding: 0 !important;
+}
+
+.content-head{
+	padding: 20px 10px!important;
+}
+#fgi-app {
+	font-size: 14px;
+	background: #EDECED;
+	padding: 15px;
+	.fgi-button{
+		font-size: 14px;
+		color: #FFF;
+		background: #589F16;
+		border: none;
+		padding: 5px 15px;
+	}
+	.make-block{
+		display:block;
+	}
+	#fgi-app-right {
+		width: 49%;
+		display: inline-block;
+		#fgi-filter-bar {
+			overflow: auto;
+			background: #D5D5D5;
+			padding: 15px;
+			border: 1px solid #979797;
+			color: #393939;
+			.pull-left{
+				padding: 0px 50px 33px 0px;
+			}
+			.form-wrap{
+				padding: 11px 0px;
+				label{
+					padding-right: 19px;
+					font-weight: 300;
+				}
+				input{
+					padding-left: 10px;
+					width: 99px;
+					height: 30px;
+					border: 1px solid #979797;
+				}
+			}
+			.disclaimer{
+				clear:left;
+				display:block;
+				float: left;
+				font-size: 12px;
+			}
+			.fgi-button{
+				float: right;
+			}
+		}
+		#fgi-combined-stats-wrap{
+			padding: 15px;
+			padding-top: 25px;
+			border: 1px solid #979797;
+			margin-top: 20px;
+			.combined-stat{
+				display: inline-block;
+				height: 26px;
+				width: 49%;
+				.stat-title{
+					float: left;
+					font-size: 12px;
+				}
+				.stat-value{
+					float: right;
+					padding-right: 20px;
+					color: #999999;
+					font-size: 12px;
+				}
+			}
+		}
+		#fgi-player-list{
+			margin-top: 20px;
+			table{
+				background: #FFF;
+				width: 100%;
+				border: 1px solid #979797;
+				thead{
+					border-bottom: 1px solid #979797;
+				}
+				tr{
+					th{
+						padding: 15px 6px;
+						font-weight: 500;
+						font-size: 12px;
+
+					}
+					td{
+						padding: 15px 6px;
+						border-bottom: 1px solid gray;
+						font-size: 12px;
+						&.center{
+							text-align:center;
+						}
+					}
+				}
+			}
+		}
+
+	}
+	#fgi-app-left{
+		width:50%;
+		display:inline-block;
+		vertical-align: top;
+		padding: 0 15px;
+		.fgi-heading{
+			font-size: 18px;
+			color: #8D8D8D;
+		}
+		#fgi-lineups{
+			margin-top: 20px;
+			table{
+				background: #FFF;
+				width: 100%;
+				border: 1px solid #979797;
+				thead{
+					border-bottom: 1px solid #979797;
+				}
+				tr{
+					th{
+						padding: 15px 6px;
+						font-weight: 500;
+						font-size: 12px;
+
+					}
+					td{
+						padding: 15px 6px;
+						border-bottom: 1px solid gray;
+						font-size: 12px;
+						&.center{
+							text-align:center;
+						}
+						&.a-gentle-nudge{
+							background: #EDECED;
+							border: none;
+							text-align: center;
+						}
+					}
+				}
+			}
+		}
+	}
+}
