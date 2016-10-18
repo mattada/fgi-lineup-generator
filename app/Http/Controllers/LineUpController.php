@@ -10,6 +10,8 @@ use App\Player;
 class LineUpController extends Controller
 {
 
+
+
     /**
      *  Fake Data with nested arrays
      * @var array
@@ -46,15 +48,14 @@ class LineUpController extends Controller
      */
     public function index(Request $request)
     {
-        if(empty($_SERVER['HTTP_REFERER'])){
-            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
-        }
+//        if(empty($_SERVER['HTTP_REFERER'])){
+//            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
+//        }
 
-        if(strpos($_SERVER['HTTP_REFERER'], "fantasygolfinsider.com") === false &&
-            strpos($_SERVER['HTTP_REFERER'], "fantasygolfbuilder.dev") === false &&
-           strpos($_SERVER['HTTP_REFERER'], "fantasygolf.dev") === false){
-            return "You do not have access to view the lineup generator";
-        }
+//        if(strpos($_SERVER['HTTP_REFERER'], "fantasygolfinsider.com") === false &&
+//           strpos($_SERVER['HTTP_REFERER'], "fantasygolf.dev") === false ){
+//            return "You do not have access to view the lineup generator";
+//        }
 
         return view('lineups');
     }
@@ -87,6 +88,9 @@ class LineUpController extends Controller
 
         foreach($players as $key => $player){
             if($player['weight'] != 0){
+                if ($player['weight'] == 100) {
+                    $player['weight'] = 1000; //Add more weight to values with 100%
+                }
                 $n2 = str_pad($n++, 5, 0, STR_PAD_LEFT);
                 $players[$n2] = $player;
             }
@@ -143,7 +147,6 @@ class LineUpController extends Controller
      */
     private function generateCombinations()
     {
-
         while(count($this->combinations) < $this->count){
             if(count($this->combinations) < 1){
                 $this->combinations[] = $this->generateCombination($this->data);
