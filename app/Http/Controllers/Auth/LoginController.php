@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -40,6 +40,24 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        return $user;
+        return redirect('/admin');
     }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/login');
+    }
+
 }

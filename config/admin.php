@@ -102,7 +102,7 @@ return [
     |
     */
 
-    'enable_auth_middleware' => false,
+    'enable_auth_middleware' => true,
 
     /*
     |--------------------------------------------------------------------------

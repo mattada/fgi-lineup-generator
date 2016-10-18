@@ -11,9 +11,11 @@
 |
 */
 
+/*
 Route::get('test2', function(){
     echo "<iframe style='width:1100px;height:400px;border:solid 1px #000;' src='http://fantasygolf.dev/lineup-generator'></iframe>";
 });
+*/
 
 Route::group(['prefix' => 'lineup-generator'], function() {
 
@@ -24,11 +26,26 @@ Route::group(['prefix' => 'lineup-generator'], function() {
 
 });
 
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');
+
+// Registration Routes...
+//Route::get('register', 'Auth\RegisterController@showRegistrationForm');
+//Route::post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 /*
 
 Route::get('/', 'HomeController@index');
 
-Auth::routes();
+
 Route::get('/logout', 'Auth\LoginController@logout');
 
 //Route::get('/home', 'HomeController@index');

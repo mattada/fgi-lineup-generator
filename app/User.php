@@ -4,9 +4,12 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\App;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -70,5 +73,5 @@ class User extends Authenticatable
     {
         return $query->where('is_admin', 0);
     }
-    
+
 }
