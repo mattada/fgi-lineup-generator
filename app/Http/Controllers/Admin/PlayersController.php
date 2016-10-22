@@ -55,7 +55,7 @@ class PlayersController extends AdministrationController
         [
             "icon" => "fa-cloud-download",
             "title" => "Import DraftKings File",
-            "route_uri" => "players/draft-kings-import"
+            "route_uri" => "/admin/players/draft-kings-import"
         ]
     ];
 
