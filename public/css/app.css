@@ -6846,11 +6846,20 @@ header {
     header .filters .stats {
       border: 1px solid #CCC;
       padding: 10px;
-      margin: 10px 2%;
+      margin: 10px 0;
       width: 60%;
       font-size: 12px;
       text-transform: uppercase; }
       header .filters .stats .actions {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-align: end;
+        align-items: flex-end;
+        margin-top: 10px;
         text-transform: none;
         font-style: italic; }
         header .filters .stats .actions input {
@@ -6866,7 +6875,7 @@ header {
     header .filters .filter {
       border: 1px solid #CCC;
       font-size: 12px;
-      margin: 10px 2%;
+      margin: 10px 0;
       width: 35%;
       padding: 10px;
       display: -ms-flexbox;
@@ -6891,7 +6900,7 @@ header {
   background-color: #EDECED; }
 
 .players {
-  margin: 0 2%;
+  margin: 0 0;
   border: 0;
   border-collapse: collapse;
   width: 96%; }
@@ -6958,7 +6967,9 @@ header {
     width: 100%;
     overflow-y: auto;
     margin-bottom: 2%;
-    height: 300px; }
+    height: 300px;
+    -ms-flex: 1;
+    flex: 1; }
 
 .expert-block {
   padding: 0 0 15px 0;

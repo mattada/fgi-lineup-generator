@@ -69,7 +69,7 @@
               <div class="col-md-4 col-sm-4 col-xs-4">Avg Salary Remaining / Player:</div>
               <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalaryRemaining}}</div>
             </div>
-            <div class="actions row" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-end; margin-top: 10px;">
+            <div class="actions row">
               {{-- <div><input class="col-md-12 col-sm-12 col-xs-12" type="text" placeholder="Search for player" /></div> --}}
               <div class="messages">@{{message}}</div>
               <div style="width: 180px;">
@@ -124,5 +124,13 @@
   <script src="/lineup-assets/vue.js"></script>
   {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
   <script src="/lineup-assets/lineups.js"></script>
+  <script>
+    $(function() {
+      $(window).resize(function() {
+        $('tbody').height($('.content').height() - ($('thead').height()) - ($(window).height() * .06));
+      });
+      $(window).resize();
+    });
+  </script>
 
 @endsection
