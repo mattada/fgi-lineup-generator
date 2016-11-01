@@ -6801,6 +6801,165 @@ button.close {
   .article-body .article-content .article-right {
     padding-right: 0; }
 
+html,
+body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%; }
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  background: #EDECED; }
+
+#fgi-app {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #FFF; }
+
+.fgi-button {
+  font-size: 14px;
+  color: #FFF;
+  background: #589F16;
+  border: none;
+  padding: 5px 15px; }
+
+header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background: #EDECED; }
+  header .filters {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+    header .filters .stats {
+      border: 1px solid #CCC;
+      padding: 10px;
+      margin: 10px 2%;
+      width: 60%;
+      font-size: 12px;
+      text-transform: uppercase; }
+      header .filters .stats .actions {
+        text-transform: none;
+        font-style: italic; }
+        header .filters .stats .actions input {
+          display: inline; }
+        header .filters .stats .actions button, header .filters .stats .actions .button-wrapper {
+          display: inline;
+          font-style: normal; }
+          header .filters .stats .actions button a, header .filters .stats .actions .button-wrapper a {
+            padding: 7px 15px !important; }
+            header .filters .stats .actions button a:hover, header .filters .stats .actions .button-wrapper a:hover {
+              color: white;
+              text-decoration: none; }
+    header .filters .filter {
+      border: 1px solid #CCC;
+      font-size: 12px;
+      margin: 10px 2%;
+      width: 35%;
+      padding: 10px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+      header .filters .filter div {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column; }
+        header .filters .filter div span {
+          margin: 2px 0;
+          text-transform: uppercase; }
+        header .filters .filter div input {
+          margin: 5px 0; }
+
+.content {
+  -ms-flex: auto;
+  flex: auto;
+  overflow-y: auto;
+  background-color: #EDECED; }
+
+.players {
+  margin: 0 2%;
+  border: 0;
+  border-collapse: collapse;
+  width: 96%; }
+  .players thead {
+    background: #CCC; }
+  .players tbody tr:nth-child(even) {
+    background: #F0F0F0; }
+  .players tbody tr:nth-child(odd) {
+    background: #FFF; }
+  .players tr {
+    display: -ms-flexbox;
+    display: flex; }
+  .players td,
+  .players th {
+    padding: 6px;
+    border-bottom: 1px solid gray;
+    font-size: 12px; }
+    .players td input,
+    .players th input {
+      padding-left: 10px;
+      width: 99px;
+      height: 30px;
+      border: 1px solid #979797;
+      background: #FFF; }
+    .players td:nth-child(1),
+    .players th:nth-child(1) {
+      width: 30%;
+      text-align: left; }
+    .players td:nth-child(2),
+    .players th:nth-child(2) {
+      width: 11%;
+      text-align: right; }
+    .players td:nth-child(3),
+    .players th:nth-child(3) {
+      width: 14%;
+      text-align: center; }
+    .players td:nth-child(4),
+    .players th:nth-child(4) {
+      width: 14%;
+      text-align: center; }
+    .players td:nth-child(5),
+    .players th:nth-child(5) {
+      width: 14%;
+      text-align: center; }
+    .players td:nth-child(6),
+    .players th:nth-child(6) {
+      width: 17%;
+      text-align: center; }
+  .players td {
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+    word-wrap: break; }
+  .players thead tr:after {
+    content: '';
+    overflow-y: scroll;
+    visibility: hidden;
+    height: 0; }
+  .players thead th {
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+    display: block; }
+  .players tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    margin-bottom: 2%;
+    height: 300px; }
+
 .expert-block {
   padding: 0 0 15px 0;
   margin-bottom: 15px;

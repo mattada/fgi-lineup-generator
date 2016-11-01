@@ -53,7 +53,7 @@ class LineUpController extends Controller
 //        }
 
 //        if(strpos($_SERVER['HTTP_REFERER'], "fantasygolfinsider.com") === false &&
-//           strpos($_SERVER['HTTP_REFERER'], "fantasygolf.dev") === false ){
+//           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
 

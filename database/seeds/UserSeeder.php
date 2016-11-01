@@ -13,19 +13,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Dalton',
-            'email' => 'dalton@activelogiclabs.com',
-            'password' => bcrypt('dalton'),
+            'name' => 'juice',
+            'email' => 'juice.johnson@gmail.com',
+            'password' => bcrypt('juice'),
             'plan_id' => 1,
-            'status' => 'inactive'
-        ]);
-        
-        User::create([
-            'name' => 'Robert',
-            'email'=> 'robert@activelogiclabs.com',
-            'password' => bcrypt('robert'),
-            'plan_id' => 2,
-            'status' => 'inactive'
+            'status' => 'active'
         ]);
     }
 }
