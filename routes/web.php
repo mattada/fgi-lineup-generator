@@ -19,9 +19,11 @@ Route::get('test2', function(){
 
 Route::group(['prefix' => 'lineup-generator'], function() {
 
-    Route::get('/', ['uses' => 'LineUpController@index']);
+    Route::get('/{slate?}', ['uses' => 'LineUpController@index']);
+    // Route::get('/', ['uses' => 'LineUpController@index']);
     Route::post('/generate', ['uses' => 'LineUpController@generate']);
-    Route::get('/players', ['uses' => 'LineUpController@players']);
+    // Route::get('/players', ['uses' => 'LineUpController@players']);
+    Route::get('/players/{slate?}', ['uses' => 'LineUpController@players']);
     Route::get('/export', ['uses' => 'LineUpController@export']);
 
 });

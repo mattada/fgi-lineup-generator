@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Player;
+use App\Slate;
 
 
 class LineUpController extends Controller
@@ -46,7 +48,8 @@ class LineUpController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function index(Request $request)
+    // public function index(Request $request)
+    public function index($slate = "pga")
     {
 //        if(empty($_SERVER['HTTP_REFERER'])){
 //            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
@@ -56,20 +59,23 @@ class LineUpController extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-
-        return view('lineups');
+        return view('lineups')->with('slate', $slate);
     }
 
 
-    public function players(Request $request)
+    public function players($slate = "pga")
     {
-        $players = Player::all();
+        // dd($request);
+        $slate_id = Slate::where('name', $slate)->first()->id;
+        $players = Player::where('slate_id', $slate_id)->get();
+        // $players = Player::all();
+
         $draft_kings_ids = array_column($players->toArray(), 'draft_kings_id');
 
         foreach($draft_kings_ids as $id){
             $rosterCounts[$id] = 0;
         }
-        return ['players' => $players, 'rosterCounts' => $rosterCounts ];
+        return response()->json(['players' => $players, 'rosterCounts' => $rosterCounts ]);
     }
     /**
      * Request handler

@@ -106,7 +106,7 @@ lineupGenerator.validateFail = function () {
 };
 
 lineupGenerator.start = function () {
-  $.get('/lineup-generator/players', function (response) {
+  $.get('/lineup-generator/players/' + window.slate_global, function (response) {
     lineupGenerator.sliders.config.data.players = response.players;
     lineupGenerator.sliders.config.data.rosterCounts = response.rosterCounts;
     lineupGenerator.sliders = new Vue(lineupGenerator.sliders.config);
