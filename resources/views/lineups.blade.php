@@ -73,9 +73,14 @@
         </div>
         <div class="actions">
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <span class="messages pull-left">@{{message}}</span>
-              <div class="pull-right" style="width: 180px;">
+            <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
+              <div class="pull-left" style="width: 100%;">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#players-wrapper" aria-controls="players-wrapper" role="tab" data-toggle="tab">Players</a></li>
+                  <li role="presentation"><a href="#lineups-wrapper" aria-controls="lineups-wrapper" role="tab" data-toggle="tab">Lineups</a></li>
+                </ul>
+              </div>
+              <div class="pull-right" style="width: 180px; margin-top: -40px;">
                 <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate()">Generate</button>
                 <div class="pull-right button-wrapper" v-if='results.length < 1'>
                   <a href="/lineup-generator/export" class="pull-right fgi-button">Export</a>
@@ -86,29 +91,50 @@
         </div>
       </header>
 
-      <div class="content">
-        <table class="players">
-          <thead>
+      <div class="tab-content content">
+        <div role="tabpanel" class="tab-pane active" id="players-wrapper">
+          <table class="players">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Salary</th>
+                <th>Target %</th>
+                <th>Target Ct</th>
+                <th>Rostered</th>
+                <th>Rostered %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="player in players">
+                <td class="fgi-player-name">@{{ player.name }}</td>
+                <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
+                <td class="fgi-player-rank"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" v-model="player.weight" type="number"></td>
+                <td>@{{ player.totalSpots =  Math.round((player.weight/100) * lineups) }}</td>
+                <td>@{{ rosterCounts[player.draft_kings_id] }}</td>
+                <td>@{{ ((rosterCounts[player.draft_kings_id] / lineups) * 100).toFixed(2) }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="lineups-wrapper">
+          <table class="lineups">
+            <thead>
             <tr>
-              <th>Player</th>
+              <th style="width:370px;">Roster</th>
               <th>Salary</th>
-              <th>Target %</th>
-              <th>Target Ct</th>
-              <th>Rostered</th>
-              <th>Rostered %</th>
             </tr>
-          </thead>
-          <tbody>
-            <tr v-for="player in players">
-              <td class="fgi-player-name">@{{ player.name }}</td>
-              <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
-              <td class="fgi-player-rank"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" v-model="player.weight"></td>
-              <td>@{{ player.totalSpots =  Math.round((player.weight/100) * lineups) }}</td>
-              <td>@{{ rosterCounts[player.draft_kings_id] }}</td>
-              <td>@{{ ((rosterCounts[player.draft_kings_id] / lineups) * 100).toFixed(2) }}%</td>
-            </tr>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <tr v-for="result in results">
+                <td class="fgi-lineup-text"> @{{ result.names }} </td>
+                <td class="fgi-salary-total"> $@{{ result.total }} </td>
+              </tr>
+              <tr>
+                <td v-if='results.length < 1'class='a-gentle-nudge' colspan="2">Infeasable to create lineups based on constraints and/or exposure specified. Please correct and check back.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
     @else
@@ -125,18 +151,18 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="/lineup-assets/vue.js"></script>
-  {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script type="text/javascript">
     window.slate_global = "{{$slate}}";
   </script>
   <script src="/lineup-assets/lineups.js"></script>
-  {{-- <script>
+  <script>
     $(function() {
-      $(window).resize(function() {
-        $('tbody').height(33 * $("tbody tr").length);
+      $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
       });
-      $(window).resize();
     });
-  </script> --}}
+  </script>
 
 @endsection

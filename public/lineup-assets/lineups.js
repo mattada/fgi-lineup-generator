@@ -20,7 +20,7 @@ lineupGenerator.sliders.config = {
     results: [],
     minSalary: 49000,
     maxSalary: 50000,
-    message: "Add more player exposure (at least 6 golfers)!",
+    message: "Please adjust filter settings to generate lineups.",
     valid: false,
     lineups: 50,
     totalSpots: 0,
