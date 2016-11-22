@@ -49,23 +49,27 @@
               <span>Minimum salary: <strong>$@{{minSalary}}</strong></span>
               <input class="fgi-slider" id="min-sal-crit" type="range" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' />
             </div>
+            <div style="margin-top: 5px;">
+              <span>Maximum salary: <strong>$@{{maxSalary}}</strong></span>
+              <input class="fgi-slider" id="max-sal-crit" type="range" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' />
+            </div>
           </div>
-          <div class="stats">
+          <div class="stats" style="margin-top: 25px;">
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Roster Spots:</span></div>
               <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSpots}}</div>
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSpotsUsed}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalary}}</div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Available:</span></div>
               <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSalaryAvailable}}</div>
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSpotsUsed}}</div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Used:</span></div>
               <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSalaryUsed}}</div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalary}}</div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
               <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalaryRemaining}}</div>
             </div>
@@ -80,9 +84,12 @@
                   <li role="presentation"><a href="#lineups-wrapper" aria-controls="lineups-wrapper" role="tab" data-toggle="tab">Lineups</a></li>
                 </ul>
               </div>
+              <div v-if='results.length > 0' class="pull-left" style="border-radius: 5px; width: 375px; text-align: center; margin-top: -37px; margin-left: 220px; background-color: #00CC33; color: white; padding: 6px; font-weight: bold;">
+                @{{lineups}} / @{{lineups}} lineups generated
+              </div>
               <div class="pull-right" style="width: 180px; margin-top: -40px;">
                 <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate()">Generate</button>
-                <div class="pull-right button-wrapper" v-if='results.length < 1'>
+                <div class="pull-right button-wrapper" v-if='results.length > 0'>
                   <a href="/lineup-generator/export" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
@@ -108,7 +115,7 @@
               <tr v-for="player in players">
                 <td class="fgi-player-name">@{{ player.name }}</td>
                 <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
-                <td class="fgi-player-rank"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" v-model="player.weight" type="number"></td>
+                <td class="fgi-player-rank"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></td>
                 <td>@{{ player.totalSpots =  Math.round((player.weight/100) * lineups) }}</td>
                 <td>@{{ rosterCounts[player.draft_kings_id] }}</td>
                 <td>@{{ ((rosterCounts[player.draft_kings_id] / lineups) * 100).toFixed(2) }}%</td>
@@ -120,14 +127,16 @@
           <table class="lineups">
             <thead>
             <tr>
-              <th style="width:370px;">Roster</th>
+              <th>#</th>
+              <th>Roster</th>
               <th>Salary</th>
             </tr>
             </thead>
             <tbody>
               <tr v-for="result in results">
-                <td class="fgi-lineup-text"> @{{ result.names }} </td>
-                <td class="fgi-salary-total"> $@{{ result.total }} </td>
+                <td class="fgi-lineup-text">1</td>
+                <td class="fgi-lineup-text">@{{result.names}}</td>
+                <td class="fgi-salary-total">$@{{result.total}}</td>
               </tr>
               <tr>
                 <td v-if='results.length < 1'class='a-gentle-nudge' colspan="2">Infeasable to create lineups based on constraints and/or exposure specified. Please correct and check back.</td>

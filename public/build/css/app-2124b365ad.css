@@ -7067,6 +7067,56 @@ header {
     -ms-flex: 1;
     flex: 1; }
 
+.lineups {
+  margin: 0 0;
+  border: 0;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #CCC; }
+  .lineups thead {
+    background: #CCC; }
+  .lineups tbody tr:nth-child(even) {
+    background: #F0F0F0; }
+  .lineups tbody tr:nth-child(odd) {
+    background: #FFF; }
+  .lineups tbody tr:nth-child(1) {
+    margin-top: 1px; }
+  .lineups tr {
+    display: -ms-flexbox;
+    display: flex; }
+  .lineups td,
+  .lineups th {
+    padding: 2px 5px;
+    font-size: 12px; }
+    .lineups td:nth-child(1),
+    .lineups th:nth-child(1) {
+      width: 75%;
+      text-align: left; }
+    .lineups td:nth-child(2),
+    .lineups th:nth-child(2) {
+      width: 15%;
+      text-align: right; }
+  .lineups td {
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+    word-wrap: break; }
+  .lineups thead tr:after {
+    content: '';
+    overflow-y: scroll;
+    visibility: hidden;
+    height: 0; }
+  .lineups thead th {
+    -ms-flex: 1 auto;
+    flex: 1 auto;
+    display: block; }
+  .lineups tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    height: 588px;
+    -ms-flex: 1;
+    flex: 1; }
+
 .expert-block {
   padding: 0 0 15px 0;
   margin-bottom: 15px;

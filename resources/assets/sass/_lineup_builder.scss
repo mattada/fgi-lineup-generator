@@ -288,3 +288,68 @@ header {
     flex: 1;
   }
 }
+
+.lineups {
+  margin: 0 0;
+  border: 0;
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #CCC;
+  thead {
+    background: #CCC;
+  }
+  tbody {
+    tr:nth-child(even) {
+      background: #F0F0F0;
+    }
+    tr:nth-child(odd) {
+      background: #FFF;
+    }
+    tr:nth-child(1) {
+      margin-top: 1px;
+    }
+  }
+  tr {
+    display: flex;
+  }
+  td,
+  th {
+    padding: 2px 5px;
+    // border-bottom: 1px solid gray;
+    font-size: 12px;
+    &:nth-child(1) {
+      width: 10%;
+      text-align: left;
+    }
+    &:nth-child(2) {
+      width: 70%;
+      text-align: left;
+    }
+    &:nth-child(3) {
+      width: 20%;
+      text-align: right;
+    }
+  }
+  td {
+    flex: 1 auto;
+    word-wrap: break;
+  }
+  thead tr:after {
+    content: '';
+    overflow-y: scroll;
+    visibility: hidden;
+    height: 0;
+  }
+  thead th {
+    flex: 1 auto;
+    display: block;
+  }
+  tbody {
+    display: block;
+    width: 100%;
+    overflow-y: auto;
+    // margin-bottom: 2%;
+    height: 588px;
+    flex: 1;
+  }
+}

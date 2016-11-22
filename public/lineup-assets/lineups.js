@@ -20,7 +20,6 @@ lineupGenerator.sliders.config = {
     results: [],
     minSalary: 49000,
     maxSalary: 50000,
-    message: "Please adjust filter settings to generate lineups.",
     valid: false,
     lineups: 50,
     totalSpots: 0,
@@ -61,7 +60,7 @@ lineupGenerator.sliders.config = {
       if(lineupGenerator.validateFail()){
         return alert('Warning: Max salary must be a higher number than the minimum salary.');
       }
-      // this.generate();
+      this.generate();
       this.updateStats();
     },
     updateStats : function () {
