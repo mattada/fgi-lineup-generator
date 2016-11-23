@@ -42,36 +42,36 @@
         <div class="filters">
           <div class="filter">
             <div>
-              <span>Number of lineups: <strong>@{{lineups}}</strong></span>
+              <span>Number of lineups: <strong class="initial-hide">@{{lineups}}</strong></span>
               <input class="fgi-slider" id="no-lineups-crit" type="range" min="1" max="150" step="1" v-model='lineups' v-on:change='update()' />
             </div>
             <div style="margin-top: 5px;">
-              <span>Minimum salary: <strong>$@{{minSalary}}</strong></span>
+              <span>Minimum salary: <strong class="initial-hide">$@{{minSalary}}</strong></span>
               <input class="fgi-slider" id="min-sal-crit" type="range" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' />
             </div>
             <div style="margin-top: 5px;">
-              <span>Maximum salary: <strong>$@{{maxSalary}}</strong></span>
+              <span>Maximum salary: <strong class="initial-hide">$@{{maxSalary}}</strong></span>
               <input class="fgi-slider" id="max-sal-crit" type="range" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' />
             </div>
           </div>
-          <div class="stats" style="margin-top: 25px;">
+          <div class="stats " style="margin-top: 25px;">
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Roster Spots:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSpots}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpots}}</span></div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Available:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSalaryAvailable}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryAvailable}}</span></div>
             </div>
             <div class="row" style="margin-top: 10px;">
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSpotsUsed}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpotsUsed}}</span></div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Used:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{totalSalaryUsed}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryUsed}}</span></div>
             </div>
             <div class="row" style="margin-top: 10px;">
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalary}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalary}}</span></div>
               <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2">@{{averageSalaryRemaining}}</div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
             </div>
           </div>
         </div>
@@ -79,18 +79,25 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
               <div class="pull-left" style="width: 100%;">
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs" role="tablist" id="myTabs">
                   <li role="presentation" class="active"><a href="#players-wrapper" aria-controls="players-wrapper" role="tab" data-toggle="tab">Players</a></li>
-                  <li role="presentation"><a href="#lineups-wrapper" aria-controls="lineups-wrapper" role="tab" data-toggle="tab">Lineups</a></li>
+                  <li role="presentation"><a href="#lineups-wrapper" arida-controls="lineups-wrapper" role="tab" data-toggle="tab">Lineups</a></li>
                 </ul>
               </div>
-              <div v-if='results.length > 0' class="pull-left" style="border-radius: 5px; width: 375px; text-align: center; margin-top: -37px; margin-left: 220px; background-color: #00CC33; color: white; padding: 6px; font-weight: bold;">
-                @{{lineups}} / @{{lineups}} lineups generated
+              <div class="initial-hide">
+                <div class="pull-left" v-if="results.length > 0" style="border-radius: 5px; width: 375px; text-align: center; margin-top: -37px; margin-left: 220px; background-color: #00CC33; color: white; padding: 6px; font-weight: bold;">
+                  @{{results.length > lineups ? lineups : results.length}} / @{{lineups}} lineups generated
+                </div>
               </div>
-              <div class="pull-right" style="width: 180px; margin-top: -40px;">
-                <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate()">Generate</button>
+              <div class="initial-hide pull-right" style="width: 210px; margin-top: -40px;">
+                <div v-if='generating'>
+                  <button class="fgi-button pull-right disabled" style="cursor: pointer;" disabled>Generating ....</button>
+                </div>
+                <div v-else>
+                  <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
+                </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  <a href="/lineup-generator/export" class="pull-right fgi-button">Export</a>
+                  <a href="/export-lus" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
             </div>
@@ -98,7 +105,7 @@
         </div>
       </header>
 
-      <div class="tab-content content">
+      <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
           <table class="players">
             <thead>
@@ -107,18 +114,18 @@
                 <th>Salary</th>
                 <th>Target %</th>
                 <th>Target Ct</th>
-                <th>Rostered</th>
+                <th>Rostered Ct</th>
                 <th>Rostered %</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="player in players">
-                <td class="fgi-player-name">@{{ player.name }}</td>
-                <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
-                <td class="fgi-player-rank"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></td>
-                <td>@{{ player.totalSpots =  Math.round((player.weight/100) * lineups) }}</td>
-                <td>@{{ rosterCounts[player.draft_kings_id] }}</td>
-                <td>@{{ ((rosterCounts[player.draft_kings_id] / lineups) * 100).toFixed(2) }}%</td>
+                <td class="fgi-player-name"><span class="initial-hide">@{{player.name}}</span></td>
+                <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
+                <td class="fgi-player-rank"><span class="initial-hide"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
+                <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
+                <td><span class="initial-hide">@{{rosterCounts[player.draft_kings_id]}}</span></td>
+                <td><span class="initial-hide">@{{isNaN(((rosterCounts[player.draft_kings_id] / lineups) * 100)) ? 0 : parseInt(((rosterCounts[player.draft_kings_id] / lineups) * 100),10)}}%</span></td>
               </tr>
             </tbody>
           </table>
@@ -133,13 +140,13 @@
             </tr>
             </thead>
             <tbody>
-              <tr v-for="result in results">
-                <td class="fgi-lineup-text">1</td>
+              <tr v-for="(index, result) in results">
+                <td class="fgi-lineup-text">@{{index+1}}</td>
                 <td class="fgi-lineup-text">@{{result.names}}</td>
                 <td class="fgi-salary-total">$@{{result.total}}</td>
               </tr>
               <tr>
-                <td v-if='results.length < 1'class='a-gentle-nudge' colspan="2">Infeasable to create lineups based on constraints and/or exposure specified. Please correct and check back.</td>
+                <td v-if='results.length < 1' class='a-gentle-nudge' colspan="3">Infeasable to create lineups based on constraints and/or exposure specified. Please correct and check back.</td>
               </tr>
             </tbody>
           </table>
@@ -165,13 +172,12 @@
     window.slate_global = "{{$slate}}";
   </script>
   <script src="/lineup-assets/lineups.js"></script>
-  <script>
+  {{-- <script>
     $(function() {
-      $('#myTabs a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-      });
+      window.setTimeout(function () {
+        $(".initial-hide").removeClass('initial-hide');
+      }, 1000);
     });
-  </script>
+  </script> --}}
 
 @endsection

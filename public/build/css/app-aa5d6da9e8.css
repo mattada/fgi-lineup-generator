@@ -6908,26 +6908,29 @@ body {
   flex-direction: column; }
 
 .fgi-button {
-  display: inline-block;
-  background: #4d4d4d;
-  padding: 7px 14px;
-  font-size: 13px;
-  font-weight: bold;
-  border: 0px;
-  cursor: pointer;
-  color: #fff;
-  font-family: 'Arial';
-  border-radius: 2px;
-  -moz-border-radius: 2px; }
+  display: inline-block !important;
+  background: #4d4d4d !important;
+  padding: 7px 14px !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  border: 0px !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  font-family: 'Arial' !important;
+  border-radius: 2px !important;
+  -moz-border-radius: 2px !important;
+  text-decoration: none !important; }
 
 .fgi-button:hover {
-  color: #fff;
-  box-shadow: inset 0px 60px 50px -50px rgba(255, 255, 255, 0.3); }
+  color: #fff !important;
+  box-shadow: inset 0px 60px 50px -50px rgba(255, 255, 255, 0.3) !important;
+  text-decoration: none !important; }
 
-.fgi-button:active {
-  color: #fff;
-  box-shadow: inset 0px 60px 50px -50px rgba(0, 0, 0, 0.14);
-  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.16); }
+.fgi-button:active, .fgi-button:visited, .fgi-button:focus {
+  color: #fff !important;
+  box-shadow: inset 0px 60px 50px -50px rgba(0, 0, 0, 0.14) !important;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.16) !important;
+  text-decoration: none !important; }
 
 header {
   color: #777;
@@ -7012,7 +7015,7 @@ header {
     display: flex; }
   .players td,
   .players th {
-    padding: 2px 5px;
+    padding: 5px;
     font-size: 12px; }
     .players td input,
     .players th input {
@@ -7067,6 +7070,9 @@ header {
     -ms-flex: 1;
     flex: 1; }
 
+.initial-hide {
+  display: none; }
+
 .lineups {
   margin: 0 0;
   border: 0;
@@ -7086,15 +7092,19 @@ header {
     display: flex; }
   .lineups td,
   .lineups th {
-    padding: 2px 5px;
+    padding: 5px;
     font-size: 12px; }
     .lineups td:nth-child(1),
     .lineups th:nth-child(1) {
-      width: 75%;
+      width: 5%;
       text-align: left; }
     .lineups td:nth-child(2),
     .lineups th:nth-child(2) {
-      width: 15%;
+      width: 75%;
+      text-align: left; }
+    .lineups td:nth-child(3),
+    .lineups th:nth-child(3) {
+      width: 20%;
       text-align: right; }
   .lineups td {
     -ms-flex: 1 auto;

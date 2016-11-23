@@ -24,9 +24,11 @@ Route::group(['prefix' => 'lineup-generator'], function() {
     Route::post('/generate', ['uses' => 'LineUpController@generate']);
     // Route::get('/players', ['uses' => 'LineUpController@players']);
     Route::get('/players/{slate?}', ['uses' => 'LineUpController@players']);
-    Route::get('/export', ['uses' => 'LineUpController@export']);
+    // Route::get('/export', ['uses' => 'LineUpController@export']);
 
 });
+
+Route::get('export-lus', ['uses' => 'LineUpController@export']);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

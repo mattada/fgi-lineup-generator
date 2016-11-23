@@ -20,7 +20,7 @@ lineupGenerator.sliders.config = {
     results: [],
     minSalary: 49000,
     maxSalary: 50000,
-    valid: false,
+    generating: false,
     lineups: 50,
     totalSpots: 0,
     totalSpotsUsed: 0,
@@ -31,12 +31,20 @@ lineupGenerator.sliders.config = {
     playerCountInc: 0
   },
   methods: {
-    generate: function () {
+    generate: function (src) {
       var payload = lineupGenerator.sliders.$data;
+      this.generating = true;
+      that = this;
       $.ajax({
         method: 'POST',
         url: '/lineup-generator/generate',
         dataType: 'json',
+        error: function () {
+          that.generating = false;
+          if (src!=="auto") {
+            alert('Warning: Infeasable to create lineups based on constraints and/or exposure specified. Please correct and try again.');
+          }
+        },
         success: function (response) {
           var inc = 1;
           lineupGenerator.sliders.$data.results = [];
@@ -44,11 +52,12 @@ lineupGenerator.sliders.config = {
           lineupGenerator.sliders.$data.rosterCounts = response.rosterCounts;
           response.combos.forEach(function (value, key) {
             setTimeout(function () {
-              value.inc = inc++;
+              // value.inc = inc++;
               lineupGenerator.sliders.$data.results.push(value);
             }, n);
             n = n + 110;
           });
+          that.generating = false;
         },
         data: {
           data: JSON.stringify(payload)
@@ -60,7 +69,7 @@ lineupGenerator.sliders.config = {
       if(lineupGenerator.validateFail()){
         return alert('Warning: Max salary must be a higher number than the minimum salary.');
       }
-      this.generate();
+      // this.generate("auto");
       this.updateStats();
     },
     updateStats : function () {
@@ -105,11 +114,13 @@ lineupGenerator.validateFail = function () {
 };
 
 lineupGenerator.start = function () {
+  // show buttons and messages
   $.get('/lineup-generator/players/' + window.slate_global, function (response) {
     lineupGenerator.sliders.config.data.players = response.players;
     lineupGenerator.sliders.config.data.rosterCounts = response.rosterCounts;
     lineupGenerator.sliders = new Vue(lineupGenerator.sliders.config);
     lineupGenerator.sliders.updateStats();
+    $(".initial-hide").removeClass('initial-hide');
   });
 };
 
