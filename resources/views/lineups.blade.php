@@ -2,201 +2,182 @@
 
 @section('styles')
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="/lineup-assets/animate.css">
-    <link rel="stylesheet" href="/lineup-assets/lineup.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/lineup-assets/animate.css">
+  {{-- <link rel="stylesheet" href="/lineup-assets/lineup.css"> --}}
 
-    <style>
+  <style>
 
-        #lineupGenerator_not_supported{
-            display:none;
-            font-size:18px;
-            color:#999;
-            text-align:center;
-            padding:20px;
-        }
+    #lineupGenerator_not_supported{
+      display:none;
+      font-size:18px;
+      color:#999;
+      text-align:center;
+      padding:20px;
+    }
 
-        @media (max-width: 1090px) {
-            #lineupGenerator{
-                display:none;
-            }
+    @media (max-width: 720px) {
+      #lineupGenerator{
+        display:none;
+      }
 
-            #lineupGenerator_not_supported{
-                display:block;
-            }
-        }
+      #lineupGenerator_not_supported {
+        display:block;
+      }
+    }
 
-    </style>
+  </style>
 
 @endsection
 
 @section('content')
 
-    <div id="lineupGenerator_not_supported">
-        The Lineup Generator has been optimized to be used with a computer. Its
-        features are not fully compatible with mobile devices. If you are currently on a
-        computer and are receiving this message, please increase the width of your
-        Browser window or enter full screen mode.
-    </div>
+  <div id="fgi-app">
 
-    <div class="col-md-12" style="padding:0;" id="lineupGenerator">
-        <div class="article-body">
+    {{--@if(Auth::check() and Auth::User()->can('view-page', 'lineup-generator'))--}}
+    @if(true)
 
-            <div class="article-content">
-
-                <div class="article-left" style="width: 100%">
-
-                    <div class="content-head">The Lineup Generator
-                        {{--<a href="{{ url('/') }}" class="content-head-link">Back to Homepage</a>--}}
-                    </div>
-
-                    <div class="article-text">
-
-                        {{--@if(Auth::check() and Auth::User()->can('view-page', 'lineup-generator'))--}}
-                        @if(true)
-                            <div id="fgi-app">
-                                <div id="fgi-app-right">
-                                    <div id="fgi-filter-bar">
-                                        <div id="form-container">
-                                            <div class="pull-left" style="padding-right:30px;">
-                                                <span># of Lineups</span>
-                                                <div class="form-wrap">
-                                                    <input v-model='lineups' v-on:change='update()' type="text">
-                                                </div>
-                                            </div>
-                                            <div style="width:72%;padding-right:0;" class="pull-left">
-                                                <div>Salary Filter</div>
-                                                <div style="width:52%; float: left;" class="form-wrap">
-                                                    <label>Ceiling</label>
-                                                    <input v-model='maxSalary' v-on:change='update()' type="text">
-                                                </div>
-                                                <div class="form-wrap make-inline">
-                                                    <label>Floor</label>
-                                                    <input v-model='minSalary' v-on:change='update()' type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <span class="disclaimer">* Be careful not to restrict the generator too much with the filter settings.</span>
-                                        <button class='fgi-button' type="button">Save Settings</button>
-                                    </div>
-                                    <div id="fgi-combined-stats-wrap">
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Total Roster Spots:</span>
-                                            <span class="stat-value">@{{totalSpots}}</span>
-                                        </div>
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Total Players Used:</span>
-                                            <span class="stat-value">@{{totalSpotsUsed }}</span>
-                                        </div>
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Avg Salary Used / Player:</span>
-                                            <span class="stat-value">@{{ averageSalary }}</span>
-                                        </div>
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Total Salary Available:</span>
-                                            <span class="stat-value">@{{ totalSalaryAvailable }}</span>
-                                        </div>
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Total Salary Used:</span>
-                                            <span class="stat-value">@{{ totalSalaryUsed }}</span>
-                                        </div>
-                                        <div class="combined-stat">
-                                            <span class="stat-title">Avg Salary Remaining / Player:</span>
-                                            <span class="stat-value">@{{ averageSalaryRemaining }}</span>
-                                        </div>
-                                    </div>
-                                    <div id="fgi-player-list">
-                                        <table>
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Player (OVR Rank)</th>
-                                                <th>Salary</th>
-                                                <th>Target %</th>
-                                                <th>Target Ct</th>
-                                                <th>Rostered</th>
-                                                <th>Rostered %</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="player in players">
-                                                <td>@{{ player.id}}</td>
-                                                <td class="fgi-player-name">@{{ player.name }}</td>
-                                                <td class="fgi-player-salary center"><span>$@{{player.salary}}</span>
-                                                </td>
-                                                <td class="fgi-player-rank center">
-                                                    <input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797; background: transparent;" v-model="player.weight">
-                                                </td>
-                                                <td class="center">@{{ player.totalSpots =  Math.round((player.weight/100) * lineups) }}</td>
-                                                <td class="center">@{{ rosterCounts[player.draft_kings_id] }}</td>
-                                                <td class="center">@{{ ((rosterCounts[player.draft_kings_id] / lineups) * 100).toFixed(2) }}%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div id="fgi-app-left">
-                                    <div>
-                                        <span class="fgi-heading">Your Lineups</span>
-                                        <button class="pull-right fgi-button" style="margin-left: 15px; padding-right:30px; cursor: pointer;" v-on:click="update()">Generate</button>
-                                        <a href="/lineup-generator/export" class="pull-right fgi-button">Export</a>
-                                    </div>
-                                    <div id="fgi-lineups">
-                                        <table>
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th style="width:370px;">Roster</th>
-                                                <th>Salary</th>
-                                                {{--<th>Proj %</th>--}}
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr v-for="result in results">
-                                                <td>@{{result.inc}}</td>
-                                                <td class="fgi-lineup-text"> @{{ result.names }} </td>
-                                                <td class="fgi-salary-total"> $@{{ result.total }} </td>
-                                                {{--<td>34%</td>--}}
-                                            </tr>
-                                            <tr>
-                                                <td v-if='results.length < 1'class='a-gentle-nudge' colspan="3">Please adjust filter settings to generate lineups.</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-
-                                </div>
-
-
-                            </div>
-
-                        @else
-
-                            @include('partials.register-to-view')
-
-                        @endif
-
-                    </div>
-
-                </div>
-
-                <div class="clear"></div>
-
+      <header>
+        <div class="filters">
+          <div class="filter">
+            <div>
+              <span>Number of lineups: <strong class="initial-hide">@{{lineups}}</strong></span>
+              <input class="fgi-slider" id="no-lineups-crit" type="range" min="1" max="150" step="1" v-model='lineups' v-on:change='update()' />
             </div>
-
+            <div style="margin-top: 5px;">
+              <span>Minimum salary: <strong class="initial-hide">$@{{minSalary}}</strong></span>
+              <input class="fgi-slider" id="min-sal-crit" type="range" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' />
+            </div>
+            <div style="margin-top: 5px;">
+              <span>Maximum salary: <strong class="initial-hide">$@{{maxSalary}}</strong></span>
+              <input class="fgi-slider" id="max-sal-crit" type="range" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' />
+            </div>
+          </div>
+          <div class="stats " style="margin-top: 25px;">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Roster Spots:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpots}}</span></div>
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Available:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryAvailable}}</span></div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpotsUsed}}</span></div>
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Used:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryUsed}}</span></div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalary}}</span></div>
+              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
+              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
+            </div>
+          </div>
         </div>
-    </div>
+        <div class="actions">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
+              <div class="pull-left" style="width: 100%;">
+                <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                  <li role="presentation" class="active"><a href="#players-wrapper" aria-controls="players-wrapper" role="tab" data-toggle="tab">Players</a></li>
+                  <li role="presentation"><a href="#lineups-wrapper" arida-controls="lineups-wrapper" role="tab" data-toggle="tab">Lineups</a></li>
+                </ul>
+              </div>
+              <div class="initial-hide">
+                <div class="pull-left" v-if="results.length > 0" style="border-radius: 5px; width: 375px; text-align: center; margin-top: -37px; margin-left: 220px; background-color: #00CC33; color: white; padding: 6px; font-weight: bold;">
+                  @{{results.length > lineups ? lineups : results.length}} / @{{lineups}} lineups generated
+                </div>
+              </div>
+              <div class="initial-hide pull-right" style="width: 210px; margin-top: -40px;">
+                <div v-if='generating'>
+                  <button class="fgi-button pull-right disabled" style="cursor: pointer;" disabled>Generating ....</button>
+                </div>
+                <div v-else>
+                  <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
+                </div>
+                <div class="pull-right button-wrapper" v-if='results.length > 0'>
+                  <a href="/export-lus" class="pull-right fgi-button">Export</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="players-wrapper">
+          <table class="players">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Salary</th>
+                <th>Target %</th>
+                <th>Target Ct</th>
+                <th>Rostered Ct</th>
+                <th>Rostered %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="player in players">
+                <td class="fgi-player-name"><span class="initial-hide">@{{player.name}}</span></td>
+                <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
+                <td class="fgi-player-rank"><span class="initial-hide"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
+                <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
+                <td><span class="initial-hide">@{{rosterCounts[player.draft_kings_id]}}</span></td>
+                <td><span class="initial-hide">@{{isNaN(((rosterCounts[player.draft_kings_id] / lineups) * 100)) ? 0 : parseInt(((rosterCounts[player.draft_kings_id] / lineups) * 100),10)}}%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="lineups-wrapper">
+          <table class="lineups">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Roster</th>
+              <th>Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(index, result) in results">
+                <td class="fgi-lineup-text">@{{index+1}}</td>
+                <td class="fgi-lineup-text">@{{result.names}}</td>
+                <td class="fgi-salary-total">$@{{result.total}}</td>
+              </tr>
+              <tr>
+                <td v-if='results.length < 1' class='a-gentle-nudge' colspan="3">Infeasable to create lineups based on constraints and/or exposure specified. Please correct and check back.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    @else
+
+      @include('partials.register-to-view')
+
+    @endif
+  </div>
 
 @endsection
 
 @section('scripts')
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="/lineup-assets/vue.js"></script>
-    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
-    <script src="/lineup-assets/lineups.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="/lineup-assets/vue.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    window.slate_global = "{{$slate}}";
+  </script>
+  <script src="/lineup-assets/lineups.js"></script>
+  {{-- <script>
+    $(function() {
+      window.setTimeout(function () {
+        $(".initial-hide").removeClass('initial-hide');
+      }, 1000);
+    });
+  </script> --}}
 
 @endsection

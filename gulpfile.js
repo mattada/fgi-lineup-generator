@@ -31,6 +31,6 @@ elixir(function(mix) {
 
         //Live reload
         .browserSync({
-            proxy: 'fantasygolf.dev'
+            proxy: 'fgi.local'
         });
 });
