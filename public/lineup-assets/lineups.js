@@ -92,9 +92,9 @@ lineupGenerator.sliders.config = {
       var totalSalaryUsed = sumSalary;
       var totalSalaryAvailable = Math.round(this.maxSalary * this.lineups);
       var averageSalary = totalSalaryUsed / totalSpotsUsed;
+      var averageSalaryRemaining = 0;
       if( isFinite(totalSalaryAvailable / totalSpotsUsed)){
-        var averageSalaryRemaining = ( (totalSalaryAvailable - totalSalaryUsed) / (totalSpots - totalSpotsUsed) ).toFixed(2);
-
+        averageSalaryRemaining = ( (totalSalaryAvailable - totalSalaryUsed) / (totalSpots - totalSpotsUsed) ).toFixed(2);
       }
 
       this.totalSpots = numeral(totalSpots).format('0,0');
@@ -103,6 +103,9 @@ lineupGenerator.sliders.config = {
       this.totalSalaryUsed = numeral(totalSalaryUsed).format('0,0');
       this.averageSalary = numeral(averageSalary).format('0,0');
       this.averageSalaryRemaining = numeral(averageSalaryRemaining).format('0,0');
+      if (this.averageSalaryRemaining === Infinity || averageSalaryRemaining > 50000) {
+        this.averageSalaryRemaining = 0;
+      }
     }
 
   }
