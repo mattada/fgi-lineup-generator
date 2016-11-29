@@ -182,21 +182,6 @@ header {
     .filter {
       font-size: 12px;
       margin: 0;
-      width: 30%;
-      margin-bottom: 17px;
-      display: flex;
-      flex-direction: column;
-      // height: 125px;
-      div {
-        display: flex;
-        flex-direction: column;
-        span {
-          margin: 2px 0;
-        }
-        input {
-          margin: 5px 0;
-        }
-      }
     }
   }
 }

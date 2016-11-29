@@ -6973,22 +6973,7 @@ header {
       font-size: 12px; }
     header .filters .filter {
       font-size: 12px;
-      margin: 0;
-      width: 30%;
-      margin-bottom: 17px;
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-direction: column;
-      flex-direction: column; }
-      header .filters .filter div {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column; }
-        header .filters .filter div span {
-          margin: 2px 0; }
-        header .filters .filter div input {
-          margin: 5px 0; }
+      margin: 0; }
 
 .content {
   -ms-flex: auto;

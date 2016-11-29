@@ -64,6 +64,9 @@ lineupGenerator.sliders.config = {
         },
       });
     },
+    clear: function () {
+      this.updateStats();
+    },
     update: function () {
       // var payload = lineupGenerator.sliders.$data;
       if(lineupGenerator.validateFail()){

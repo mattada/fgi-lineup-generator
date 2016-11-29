@@ -40,38 +40,38 @@
 
       <header>
         <div class="filters">
-          <div class="filter">
-            <div>
-              <span>Number of lineups: <strong class="initial-hide">@{{lineups}}</strong></span>
-              <input class="fgi-slider" id="no-lineups-crit" type="range" min="1" max="150" step="1" v-model='lineups' v-on:change='update()' />
+          <div class="filter " style="margin-top: 10px;">
+            <div class="row" style="margin-top: 5px;">
+              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">No. of lineups:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="no-lineups-crit" type="number" min="1" max="150" step="1" v-model='lineups' v-on:change='update()' /></div>
             </div>
-            <div style="margin-top: 5px;">
-              <span>Minimum salary: <strong class="initial-hide">$@{{minSalary}}</strong></span>
-              <input class="fgi-slider" id="min-sal-crit" type="range" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' />
+            <div class="row" style="margin-top: 5px;">
+              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Min salary:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="min-sal-crit" type="number" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' /></div>
             </div>
-            <div style="margin-top: 5px;">
-              <span>Maximum salary: <strong class="initial-hide">$@{{maxSalary}}</strong></span>
-              <input class="fgi-slider" id="max-sal-crit" type="range" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' />
+            <div class="row" style="margin-top: 5px;">
+              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max salary:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-sal-crit" type="number" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' /></div>
             </div>
           </div>
-          <div class="stats " style="margin-top: 25px;">
+          <div class="stats " style="margin-top: 10px;">
             <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Roster Spots:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpots}}</span></div>
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Available:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryAvailable}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Roster Spots:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpots}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Available:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryAvailable}}</span></div>
             </div>
             <div class="row" style="margin-top: 10px;">
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpotsUsed}}</span></div>
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Used:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryUsed}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Players Used:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSpotsUsed}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Total Salary Used:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{totalSalaryUsed}}</span></div>
             </div>
             <div class="row" style="margin-top: 10px;">
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalary}}</span></div>
-              <div class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
-              <div class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Used / Player:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalary}}</span></div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
             </div>
           </div>
         </div>
@@ -107,6 +107,11 @@
 
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
+          <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <small class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
+            </div>
+          </div>
           <table class="players">
             <thead>
               <tr>
@@ -122,7 +127,7 @@
               <tr v-for="player in players">
                 <td class="fgi-player-name"><span class="initial-hide">@{{player.name}}</span></td>
                 <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
-                <td class="fgi-player-rank"><span class="initial-hide"><input v-on:change='update()' style="font-size: 12px; text-align:center; width:40px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
+                <td class="fgi-player-rank"><span class="initial-hide"><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
                 <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
                 <td><span class="initial-hide">@{{rosterCounts[player.draft_kings_id]}}</span></td>
                 <td><span class="initial-hide">@{{isNaN(((rosterCounts[player.draft_kings_id] / lineups) * 100)) ? 0 : parseInt(((rosterCounts[player.draft_kings_id] / lineups) * 100),10)}}%</span></td>
@@ -172,12 +177,12 @@
     window.slate_global = "{{$slate}}";
   </script>
   <script src="/lineup-assets/lineups.js"></script>
-  {{-- <script>
+  <script>
     $(function() {
-      window.setTimeout(function () {
-        $(".initial-hide").removeClass('initial-hide');
-      }, 1000);
+      $("#clear-exposure").on('click', function() {
+        $(".exposure-item").val(0).trigger("change");
+      });
     });
-  </script> --}}
+  </script>
 
 @endsection
