@@ -95,9 +95,9 @@ class LineUpController extends Controller
         foreach($players as $key => $player){
             if($player['weight'] != 0){
                 if ($player['weight'] == 100) {
-                    $player['weight'] = 1000; //Add more weight to values with 100%
+                    $player['weight'] = 10000; //Add more weight to values with 100%
                 }
-                $n2 = str_pad($n++, 5, 0, STR_PAD_LEFT);
+                $n2 = $player['draft_kings_id'];
                 $players[$n2] = $player;
             }
             unset($players[$key]);
@@ -119,9 +119,10 @@ class LineUpController extends Controller
 
     public function export(Request $request)
     {
-        header("Content-type: text/csv;charset=utf8;");
+        header("Content-type: text/csv");
         header("Pragma: no-cache");
         header("Expires: 0");
+        header("Content-Disposition: attachment; filename=dk_lineups.csv");
 
         $dump = [];
 
@@ -142,10 +143,6 @@ class LineUpController extends Controller
 
         fclose($out);
 
-        $filename = 'dk_lineups';
-
-        header("Content-Disposition: attachment; filename={$filename}.csv");
-
     }
 
     /**
@@ -160,7 +157,7 @@ class LineUpController extends Controller
             }
             $combo = $this->generateCombination($this->data);
             if ($combo){
-                $this->ensureUnique($combo);
+                $combo = $this->ensureUnique($combo);
                 $this->combinations[] = $combo;
             } else {
                 break;
@@ -182,10 +179,7 @@ class LineUpController extends Controller
      */
     private function ensureUnique($newCombination)
     {
-        // print_r($newCombination);
-        ksort($newCombination);
         foreach($this->combinations as $key => $combination){
-            ksort($combination);
             if(empty( array_diff_key($combination, $newCombination) ) ){
                 return $this->ensureUnique($this->generateCombination($this->data));
             }
