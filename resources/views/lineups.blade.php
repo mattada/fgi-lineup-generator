@@ -179,7 +179,8 @@
   <script src="/lineup-assets/lineups.js"></script>
   <script>
     $(function() {
-      $("#clear-exposure").on('click', function() {
+      $("#clear-exposure").on('click', function(e) {
+        e.preventDefault();
         $(".exposure-item").val(0).trigger("change");
       });
     });

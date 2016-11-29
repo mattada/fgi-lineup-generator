@@ -119,6 +119,10 @@ class LineUpController extends Controller
 
     public function export(Request $request)
     {
+        header("Content-type: text/csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
         $dump = [];
 
         foreach( session('combinations') as $combo){
@@ -140,10 +144,7 @@ class LineUpController extends Controller
 
         $filename = 'lineups-' . Carbon::now()->format('Y-m-d');
 
-        header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename={$filename}.csv");
-        header("Pragma: no-cache");
-        header("Expires: 0");
 
     }
 
