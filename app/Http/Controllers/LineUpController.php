@@ -182,7 +182,10 @@ class LineUpController extends Controller
      */
     private function ensureUnique($newCombination)
     {
+        // print_r($newCombination);
+        ksort($newCombination);
         foreach($this->combinations as $key => $combination){
+            ksort($combination);
             if(empty( array_diff_key($combination, $newCombination) ) ){
                 return $this->ensureUnique($this->generateCombination($this->data));
             }

@@ -65,6 +65,7 @@ lineupGenerator.sliders.config = {
       });
     },
     clear: function () {
+      // lineupGenerator.sliders.$data.results = [];
       this.updateStats();
     },
     update: function () {
