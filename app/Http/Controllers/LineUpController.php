@@ -119,7 +119,7 @@ class LineUpController extends Controller
 
     public function export(Request $request)
     {
-        header("Content-type: text/csv");
+        header("Content-type: text/csv;charset=utf8;");
         header("Pragma: no-cache");
         header("Expires: 0");
 
@@ -142,7 +142,7 @@ class LineUpController extends Controller
 
         fclose($out);
 
-        $filename = 'lineups-' . Carbon::now()->format('Y-m-d');
+        $filename = 'dk_lineups';
 
         header("Content-Disposition: attachment; filename={$filename}.csv");
 
