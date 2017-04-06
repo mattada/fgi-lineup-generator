@@ -126,14 +126,25 @@ class LineUpController extends Controller
 
         $dump = [];
 
+        $index = 0;
+
         foreach( session('combinations') as $combo){
             $dump[] = $combo['ids'];
+            if ($index == 0) {
+                $dump[] = '';
+                $dump[] = '1. Locate the player you want to select in the list below ';
+            }
+            if ($index == 1) {
+                $dump[] = '';
+                $dump[] = '2. Copy the ID of your player (you can use the Name + ID column or the ID column) ';
+            }
+            $index++;
         }
 
         $out = fopen('php://output', 'w');
 
         // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
-        $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG',];
+        $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
 
         fputcsv($out, $headers);
 
