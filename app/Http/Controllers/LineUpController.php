@@ -131,12 +131,12 @@ class LineUpController extends Controller
         foreach( session('combinations') as $combo){
             $dump[] = $combo['ids'];
             if ($index == 0) {
-                $dump[] = '';
-                $dump[] = '1. Locate the player you want to select in the list below ';
+                $dump[] = "";
+                $dump[] = "1. Locate the player you want to select in the list below ";
             }
             if ($index == 1) {
-                $dump[] = '';
-                $dump[] = '2. Copy the ID of your player (you can use the Name + ID column or the ID column) ';
+                $dump[] = "";
+                $dump[] = "2. Copy the ID of your player (you can use the Name + ID column or the ID column) ";
             }
             $index++;
         }
