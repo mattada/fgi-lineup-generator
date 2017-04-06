@@ -98,7 +98,7 @@
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
                   @if( (date('N', strtotime( Carbon\Carbon::now() )) >= 3) )
-                    <a href="/export-lus-wg" download="dk_lineups.csv" class="pull-right fgi-button">Export WG</a>
+                    <a href="/export-lus-wg" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
                   @else
                     <a href="/export-lus" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
                   @endif
