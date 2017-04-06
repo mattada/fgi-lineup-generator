@@ -126,6 +126,47 @@ class LineUpController extends Controller
 
         $dump = [];
 
+        // $index = 0;
+
+        foreach( session('combinations') as $combo){
+            // if ($index == 0) {
+            //     $dump[] = $combo['ids'] . ", ," . "1. Locate the player you want to select in the list below ";
+            // }
+            // if ($index == 1) {
+            //     $dump[] = $combo['ids'] . ", ," . "2. Copy the ID of your player (you can use the Name + ID column or the ID column) ";
+            // }
+            // if ($index > 1) {
+            //     $dump[] = $combo['ids'];
+            // }
+            // $index++;
+            $dump[] = $combo['ids'];
+        }
+
+        $out = fopen('php://output', 'w');
+
+        $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
+        // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
+
+        fputcsv($out, $headers);
+
+        foreach($dump as $line)
+        {
+            fputcsv($out, array_map("intval", explode(',' , $line) ));
+        }
+
+        fclose($out);
+
+    }
+
+    public function export_weekend(Request $request)
+    {
+        header("Content-type: text/csv");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        header("Content-Disposition: attachment; filename=dk_lineups.csv");
+
+        $dump = [];
+
         $index = 0;
 
         foreach( session('combinations') as $combo){

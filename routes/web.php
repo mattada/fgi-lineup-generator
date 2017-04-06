@@ -29,6 +29,7 @@ Route::group(['prefix' => 'lineup-generator'], function() {
 });
 
 Route::get('export-lus', ['uses' => 'LineUpController@export']);
+Route::get('export-lus-wg', ['uses' => 'LineUpController@export_weekend']);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
