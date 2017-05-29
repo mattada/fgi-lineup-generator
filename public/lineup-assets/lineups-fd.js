@@ -55,7 +55,7 @@ lineupGenerator.sliders.config = {
               // value.inc = inc++;
               lineupGenerator.sliders.$data.results.push(value);
             }, n);
-            n = n + 110;
+            n = n + 55;
           });
           that.generating = false;
         },
