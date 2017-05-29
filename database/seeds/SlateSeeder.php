@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Slate;
 
-class SeedSlates extends Seeder
+class SlateSeeder extends Seeder
 {
     /**
      * Run the database seeds.
