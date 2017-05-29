@@ -33,7 +33,7 @@
 
 @section('content')
 
-  <div id="fgi-app-fd">
+  <div id="fgi-app">
 
     {{--@if(Auth::check() and Auth::User()->can('view-page', 'lineup-generator'))--}}
     @if(true)
@@ -97,11 +97,7 @@
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  @if( (date('N', strtotime( Carbon\Carbon::now() )) >= 5) )
-                    <a href="/export-lus-wg" download="fd_lineups.csv" class="pull-right fgi-button">Export</a>
-                  @else
-                    <a href="/export-lus" download="fd_lineups.csv" class="pull-right fgi-button">Export</a>
-                  @endif
+                  <a href="/export-lus-fd" download="fd_lineups.csv" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
             </div>

@@ -15,7 +15,7 @@ lineupGenerator.initRosterCount = function (id){
 };
 
 lineupGenerator.sliders.config = {
-  el: '#fgi-app-fd',
+  el: '#fgi-app',
   data: {
     results: [],
     minSalary: 59000,
@@ -80,7 +80,7 @@ lineupGenerator.sliders.config = {
       var sumSpots = 0;
       var sumSalary = 0;
 
-      var totalSpots = 6 * this.lineups;
+      var totalSpots = 8 * this.lineups;
       this.players.forEach( function (value, index){
          if(value.totalSpots){
           sumSpots = sumSpots + parseInt(value.totalSpots,10);

@@ -46,7 +46,7 @@ Route::get('export-lus', ['uses' => 'LineUpController@export']);
 Route::get('export-lus-wg', ['uses' => 'LineUpController@export_weekend']);
 
 // fanduel export
-Route::get('export-lus-fd', ['uses' => 'LineUpController@export_fd']);
+Route::get('export-lus-fd', ['uses' => 'LineUpControllerFd@export']);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
