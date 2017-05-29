@@ -59,7 +59,7 @@ class LineUpControllerFd extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-        return viefd'lineups-fd')->with('slate', $slate);
+        return view('lineups-fd')->with('slate', $slate);
     }
 
 
@@ -85,7 +85,7 @@ class LineUpControllerFd extends Controller
     {
 
         $data = json_decode($request->data);
-        $this->count = $datfd>lineups;
+        $this->count = $data->lineups;
         $this->minSalary = $data->minSalary;
         $this->maxSalary = $data->maxSalary;
 
@@ -151,7 +151,8 @@ class LineUpControllerFd extends Controller
 
         foreach($dump as $line)
         {
-            fputcsv($out, array_map("intval", explode(',' , $line) ));
+            // fputcsv($out, array_map("intval", explode(',' , $line) ));
+            fputcsv($out, array_map("trim", explode(',',ltrim($line)) ));
         }
 
         fclose($out);
