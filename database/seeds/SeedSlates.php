@@ -12,13 +12,13 @@ class SeedSlates extends Seeder
      */
     public function run()
     {
-        Slate::create([
-          'name' => "PGA"
-        ]);
+        // Slate::create([
+        //   'name' => "PGA"
+        // ]);
 
-        Slate::create([
-          'name' => "Euro"
-        ]);
+        // Slate::create([
+        //   'name' => "Euro"
+        // ]);
 
         Slate::create([
           'name' => "FD"
