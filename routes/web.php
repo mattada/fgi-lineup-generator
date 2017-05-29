@@ -17,6 +17,7 @@ Route::get('test2', function(){
 });
 */
 
+// draftkings generate
 Route::group(['prefix' => 'lineup-generator'], function() {
 
     Route::get('/{slate?}', ['uses' => 'LineUpController@index']);
@@ -28,8 +29,24 @@ Route::group(['prefix' => 'lineup-generator'], function() {
 
 });
 
+// fanduel generate
+Route::group(['prefix' => 'lineup-generator-fd'], function() {
+
+    Route::get('/{slate?}', ['uses' => 'LineUpControllerFd@index']);
+    // Route::get('/', ['uses' => 'LineUpControllerFd@index']);
+    Route::post('/generate', ['uses' => 'LineUpControllerFd@generate']);
+    // Route::get('/players', ['uses' => 'LineUpControllerFd@players']);
+    Route::get('/players/{slate?}', ['uses' => 'LineUpControllerFd@players']);
+    // Route::get('/export', ['uses' => 'LineUpControllerFd@export']);
+
+});
+
+// draftkings exports
 Route::get('export-lus', ['uses' => 'LineUpController@export']);
 Route::get('export-lus-wg', ['uses' => 'LineUpController@export_weekend']);
+
+// fanduel export
+Route::get('export-lus-fd', ['uses' => 'LineUpController@export_fd']);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

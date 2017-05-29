@@ -19,5 +19,9 @@ class SeedSlates extends Seeder
         Slate::create([
           'name' => "Euro"
         ]);
+
+        Slate::create([
+          'name' => "FD"
+        ]);
     }
 }
