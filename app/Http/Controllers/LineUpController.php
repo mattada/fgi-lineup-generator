@@ -151,7 +151,8 @@ class LineUpController extends Controller
 
         foreach($dump as $line)
         {
-            fputcsv($out, array_map("intval", explode(',' , $line) ));
+            // fputcsv($out, array_map("intval", explode(',' , $line) ));
+            fputcsv($out, array_map("trim", explode(',',ltrim($line)) ));
         }
 
         fclose($out);
@@ -191,7 +192,8 @@ class LineUpController extends Controller
 
         foreach($dump as $line)
         {
-            fputcsv($out, array_map("intval", explode(',' , $line) ));
+            // fputcsv($out, array_map("intval", explode(',' , $line) ));
+            fputcsv($out, array_map("trim", explode(',',ltrim($line)) ));
         }
 
         fclose($out);
