@@ -97,11 +97,7 @@
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  @if( (date('N', strtotime( Carbon\Carbon::now() )) > 5) )
-                    <a href="/export-lus-wg" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
-                  @else
-                    <a href="/export-lus" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
-                  @endif
+                  <a href="/export-lus-nfl" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
             </div>
@@ -112,8 +108,17 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
           <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <small class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
+            <div class="col-xs-8">
+              <ul class="nav nav-pills" style="font-size: 90%; margin-top: 10px; margin-bottom: 5px;">
+                <li v-bind:class="{ active: position === 'QB'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('QB')">QB</a></li>
+                <li v-bind:class="{ active: position === 'RB'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('RB')">RB</a></li>
+                <li v-bind:class="{ active: position === 'WR'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('WR')">WR</a></li>
+                <li v-bind:class="{ active: position === 'TE'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('TE')">TE</a></li>
+                <li v-bind:class="{ active: position === 'DST'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('DST')">DST</a></li>
+              </ul>
+            </div>
+            <div class="col-xs-4">
+              <small style="margin-top: 15px;" class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
             </div>
           </div>
           <table class="players">
@@ -127,14 +132,14 @@
                 <th>Rostered %</th>
               </tr>
             </thead>
-            <tbody>
-              <tr v-for="player in players">
-                <td class="fgi-player-name"><span class="initial-hide">@{{player.name}}</span></td>
-                <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
-                <td class="fgi-player-rank"><span class="initial-hide"><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
-                <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
-                <td><span class="initial-hide">@{{rosterCounts[player.draft_kings_id]}}</span></td>
-                <td><span class="initial-hide">@{{isNaN(((rosterCounts[player.draft_kings_id] / lineups) * 100)) ? 0 : parseInt(((rosterCounts[player.draft_kings_id] / lineups) * 100),10)}}%</span></td>
+            <tbody class="initial-hide-td-spans">
+              <tr v-for="player in players | filterBy position in 'position'">
+                <td class="fgi-player-name"><span>@{{player.name}} (@{{player.position}}-@{{player.team}})</span></td>
+                <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
+                <td class="fgi-player-rank"><span><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
+                <td><span>@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
+                <td><span>@{{rosterCounts[player.draft_kings_id]}}</span></td>
+                <td><span>@{{isNaN(((rosterCounts[player.draft_kings_id] / lineups) * 100)) ? 0 : parseInt(((rosterCounts[player.draft_kings_id] / lineups) * 100),10)}}%</span></td>
               </tr>
             </tbody>
           </table>
@@ -180,7 +185,7 @@
   <script type="text/javascript">
     window.slate_global = "{{$slate}}";
   </script>
-  <script src="/lineup-assets/lineups.js"></script>
+  <script src="/lineup-assets/lineups-nfl.js"></script>
   <script>
     $(function() {
       $("#clear-exposure").on('click', function(e) {

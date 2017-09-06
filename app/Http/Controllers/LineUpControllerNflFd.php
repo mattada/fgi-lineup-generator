@@ -9,7 +9,7 @@ use App\Player;
 use App\Slate;
 
 
-class LineUpController extends Controller
+class LineUpControllerNflFd extends Controller
 {
 
 
@@ -24,7 +24,7 @@ class LineUpController extends Controller
      * Limit of items in each combination
      *
      */
-    private $limit = 6;
+    private $limit = 8;
 
     /**
      * Number of desired combinations
@@ -49,7 +49,7 @@ class LineUpController extends Controller
      * @return mixed
      */
     // public function index(Request $request)
-    public function index($slate = "pga")
+    public function index($slate = "fd")
     {
 //        if(empty($_SERVER['HTTP_REFERER'])){
 //            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
@@ -59,11 +59,11 @@ class LineUpController extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-        return view('lineups')->with('slate', $slate);
+        return view('lineups-fd')->with('slate', $slate);
     }
 
 
-    public function players($slate = "pga")
+    public function players($slate = "fd")
     {
         // dd($request);
         $slate_id = Slate::where('name', $slate)->first()->id;
@@ -122,7 +122,7 @@ class LineUpController extends Controller
         header("Content-type: text/csv");
         header("Pragma: no-cache");
         header("Expires: 0");
-        header("Content-Disposition: attachment; filename=dk_lineups.csv");
+        header("Content-Disposition: attachment; filename=fd_lineups.csv");
 
         $dump = [];
 
@@ -144,49 +144,8 @@ class LineUpController extends Controller
 
         $out = fopen('php://output', 'w');
 
-        $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
+        $headers = ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G',];
         // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
-
-        fputcsv($out, $headers);
-
-        foreach($dump as $line)
-        {
-            // fputcsv($out, array_map("intval", explode(',' , $line) ));
-            fputcsv($out, array_map("trim", explode(',',ltrim($line)) ));
-        }
-
-        fclose($out);
-
-    }
-
-    public function export_weekend(Request $request)
-    {
-        header("Content-type: text/csv");
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        header("Content-Disposition: attachment; filename=dk_lineups.csv");
-
-        $dump = [];
-
-        $index = 0;
-
-        foreach( session('combinations') as $combo){
-            if ($index == 0) {
-                $dump[] = $combo['ids'] . ", ," . "1. Locate the player you want to select in the list below ";
-            }
-            if ($index == 1) {
-                $dump[] = $combo['ids'] . ", ," . "2. Copy the ID of your player (you can use the Name + ID column or the ID column) ";
-            }
-            if ($index > 1) {
-                $dump[] = $combo['ids'];
-            }
-            $index++;
-        }
-
-        $out = fopen('php://output', 'w');
-
-        // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
-        $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
 
         fputcsv($out, $headers);
 

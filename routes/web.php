@@ -29,6 +29,18 @@ Route::group(['prefix' => 'lineup-generator'], function() {
 
 });
 
+// draftkings NFL generate
+Route::group(['prefix' => 'lineup-generator-nfl'], function() {
+
+    Route::get('/{slate?}', ['uses' => 'LineUpControllerNfl@index']);
+    // Route::get('/', ['uses' => 'LineUpController@index']);
+    Route::post('/generate', ['uses' => 'LineUpControllerNfl@generate']);
+    // Route::get('/players', ['uses' => 'LineUpController@players']);
+    Route::get('/players/{slate?}', ['uses' => 'LineUpControllerNfl@players']);
+    // Route::get('/export', ['uses' => 'LineUpController@export']);
+
+});
+
 // fanduel generate
 Route::group(['prefix' => 'lineup-generator-fd'], function() {
 
@@ -44,9 +56,11 @@ Route::group(['prefix' => 'lineup-generator-fd'], function() {
 // draftkings exports
 Route::get('export-lus', ['uses' => 'LineUpController@export']);
 Route::get('export-lus-wg', ['uses' => 'LineUpController@export_weekend']);
+Route::get('export-lus-nfl', ['uses' => 'LineUpControllerNfl@export']);
 
 // fanduel export
 Route::get('export-lus-fd', ['uses' => 'LineUpControllerFd@export']);
+Route::get('export-lus-nfl-fd', ['uses' => 'LineUpControllerNflFd@export']);
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

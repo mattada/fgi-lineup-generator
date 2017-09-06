@@ -34,6 +34,8 @@ class PlayersController extends AdministrationController
   public $overviewFields = [
     'name' => 'Name',
     'salary' => 'Salary',
+    'position' => 'Position',
+    'team' => 'Team',
     'slate_id' => "Slate",
     'updated_at' => 'Last Updated'
   ];
@@ -45,6 +47,8 @@ class PlayersController extends AdministrationController
       "group_fields" => [
         'name' => 'Name',
         'salary' => 'Salary',
+        'position' => 'Position',
+        'team' => 'Team',
         'slate_id' => "slate_id",
       ]
     ]
@@ -88,6 +92,8 @@ class PlayersController extends AdministrationController
       $requiredColumns = [
         'name' => 'Name',
         'salary' => 'Salary',
+        'position' => 'Position',
+        'team' => 'Team',
         'draft_kings_id' => 'ID'
       ];
 

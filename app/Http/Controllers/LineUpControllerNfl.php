@@ -9,7 +9,7 @@ use App\Player;
 use App\Slate;
 
 
-class LineUpController extends Controller
+class LineUpControllerNfl extends Controller
 {
 
 
@@ -24,7 +24,7 @@ class LineUpController extends Controller
      * Limit of items in each combination
      *
      */
-    private $limit = 6;
+    private $limit = 9;
 
     /**
      * Number of desired combinations
@@ -49,7 +49,7 @@ class LineUpController extends Controller
      * @return mixed
      */
     // public function index(Request $request)
-    public function index($slate = "pga")
+    public function index($slate = "DK NFL Main")
     {
 //        if(empty($_SERVER['HTTP_REFERER'])){
 //            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
@@ -59,11 +59,11 @@ class LineUpController extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-        return view('lineups')->with('slate', $slate);
+        return view('lineups-nfl')->with('slate', $slate);
     }
 
 
-    public function players($slate = "pga")
+    public function players($slate = "DK NFL Main")
     {
         // dd($request);
         $slate_id = Slate::where('name', $slate)->first()->id;
@@ -103,7 +103,9 @@ class LineUpController extends Controller
             unset($players[$key]);
         }
         $this->data = $players;
+        
         session(['combinations' => $this->generateCombinations() ]);
+
         $ids = array_column(session('combinations'), 'ids');
         foreach($ids as $id){
             $idArr[] = explode(',', $id);
@@ -144,49 +146,10 @@ class LineUpController extends Controller
 
         $out = fopen('php://output', 'w');
 
-        $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
+        // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
         // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
 
-        fputcsv($out, $headers);
-
-        foreach($dump as $line)
-        {
-            // fputcsv($out, array_map("intval", explode(',' , $line) ));
-            fputcsv($out, array_map("trim", explode(',',ltrim($line)) ));
-        }
-
-        fclose($out);
-
-    }
-
-    public function export_weekend(Request $request)
-    {
-        header("Content-type: text/csv");
-        header("Pragma: no-cache");
-        header("Expires: 0");
-        header("Content-Disposition: attachment; filename=dk_lineups.csv");
-
-        $dump = [];
-
-        $index = 0;
-
-        foreach( session('combinations') as $combo){
-            if ($index == 0) {
-                $dump[] = $combo['ids'] . ", ," . "1. Locate the player you want to select in the list below ";
-            }
-            if ($index == 1) {
-                $dump[] = $combo['ids'] . ", ," . "2. Copy the ID of your player (you can use the Name + ID column or the ID column) ";
-            }
-            if ($index > 1) {
-                $dump[] = $combo['ids'];
-            }
-            $index++;
-        }
-
-        $out = fopen('php://output', 'w');
-
-        // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
-        $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
+        $headers = ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'FLEX', 'DST'];
 
         fputcsv($out, $headers);
 
@@ -219,12 +182,18 @@ class LineUpController extends Controller
             }
 
         }
-        foreach($this->combinations as $key => $combination){
-            $combo['names'] = implode(', ', array_column($combination, 'name'));
-            $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
-            $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
-            $this->combinations[$key] = $combo;
-        }
+        // moved to generateCombination method!!!!
+
+
+        // foreach($this->combinations as $key => $combination){
+        //     $combo['names'] = implode(', ', array_column($combination, 'name'));
+        //     $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
+        //     $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
+        //     // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
+        //     // var_dump($combo['total']);
+        //     // var_dump($combination);
+        //     $this->combinations[$key] = $combo;
+        // }
         return $this->combinations;
     }
 
@@ -245,11 +214,21 @@ class LineUpController extends Controller
 
     /**
      * Restricts to salary range
+     * AND also position constraints added
      *
      */
-    private function ensureSalaryRange($newCombination){
+    private function ensureSalaryRange($newCombination)
+    {
+        $positions = implode(', ', array_column($newCombination, 'position'));
+        $qb_cnt = substr_count($positions, 'QB');
+        $rb_cnt = substr_count($positions, 'RB');
+        $wr_cnt = substr_count($positions, 'WR');
+        $te_cnt = substr_count($positions, 'TE');
+        $dst_cnt = substr_count($positions, 'DST');
+
         $total =(int) array_sum(array_column($newCombination, 'salary'));
-        if($total > $this->maxSalary || $total < $this->minSalary){
+
+        if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
             return $this->generateCombination($this->data);
         }
         return $newCombination;
@@ -273,6 +252,40 @@ class LineUpController extends Controller
             }
 
         }
+
+        // $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
+        // var_dump($position_sort['QB']);
+
+        
+        // $qbs = [];
+        // $rbs = [];
+        // $wrs = [];
+        // $tes = [];
+        // $dsts = [];
+        // foreach ($combination as $key => $value) {
+        //     if ($value['position'] == 'QB') {
+        //         array_push($qbs, $value['name']);
+        //     }
+        //     if ($value['position'] == 'RB') {
+        //         array_push($rbs, $value['name']);
+        //     }
+        //     if ($value['position'] == 'WR') {
+        //         array_push($wrs, $value['name']);
+        //     }
+        //     if ($value['position'] == 'TE') {
+        //         array_push($tes, $value['name']);
+        //     }
+        //     if ($value['position'] == 'DST') {
+        //         array_push($dsts, $value['name']);
+        //     }
+        // }
+        // var_dump($qbs);
+
+        $combination['names'] = implode(', ', array_column($combination, 'name'));
+        // the names need to be in order of position
+        // QB, RB, RB, WR, WR, WR, TE, FLEX, DST
+        $combination['total'] = (int) array_sum(array_column($combination, 'salary'));
+        $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
 
         return $this->ensureSalaryRange($combination);
     }

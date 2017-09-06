@@ -20,8 +20,24 @@ class SlateSeeder extends Seeder
         //   'name' => "Euro"
         // ]);
 
+        // Slate::create([
+        //   'name' => "FD"
+        // ]);
+
         Slate::create([
-          'name' => "FD"
+          'name' => "DK NFL Main"
+        ]);
+
+        Slate::create([
+          'name' => "DK NFL THU-MON"
+        ]);
+
+        Slate::create([
+          'name' => "FD NFL Main"
+        ]);
+
+        Slate::create([
+          'name' => "FD NFL THU-MON"
         ]);
     }
 }
