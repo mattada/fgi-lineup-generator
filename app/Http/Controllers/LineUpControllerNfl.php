@@ -183,12 +183,11 @@ class LineUpControllerNfl extends Controller
     {
         while(count($this->combinations) < $this->count){
             if(count($this->combinations) < 1){
-                $this->combinations[] = $this->ensureSalaryRange($this->generateCombination($this->data));
+                $this->combinations[] = $this->generateCombination($this->data);
             }
             $combo = $this->generateCombination($this->data);
             if ($combo){
-                // $combo = $this->ensureUnique($combo);
-                $combo = $this->ensureSalaryRange($combo);
+                $combo = $this->ensureUnique($combo);
                 $this->combinations[] = $combo;
             } else {
                 break;
@@ -324,8 +323,7 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
-        // return $this->ensureSalaryRange($combination);
-        return $this->ensureUnique($combination);
+        return $this->ensureSalaryRange($combination);
     }
 
     /**
