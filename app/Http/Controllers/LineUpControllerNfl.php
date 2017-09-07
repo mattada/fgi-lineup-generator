@@ -187,7 +187,8 @@ class LineUpControllerNfl extends Controller
             }
             $combo = $this->generateCombination($this->data);
             if ($combo){
-                $combo = $this->ensureUnique($combo);
+                // $combo = $this->ensureUnique($combo);
+                $combo = $this->ensureSalaryRange($combo);
                 $this->combinations[] = $combo;
             } else {
                 break;
@@ -236,13 +237,9 @@ class LineUpControllerNfl extends Controller
         $te_cnt = substr_count($positions, 'TE');
         $dst_cnt = substr_count($positions, 'DST');
 
-        // var_dump($newCombination);
-
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
         if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
-        // if($total > $this->maxSalary || $total < $this->minSalary){
-            var_dump($newCombination);
             return $this->generateCombination($this->data);
         }
         return $newCombination;
@@ -327,7 +324,8 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
-        return $this->ensureSalaryRange($combination);
+        // return $this->ensureSalaryRange($combination);
+        return $this->ensureUnique($combination);
     }
 
     /**
