@@ -183,7 +183,7 @@ class LineUpControllerNfl extends Controller
     {
         while(count($this->combinations) < $this->count){
             if(count($this->combinations) < 1){
-                $this->combinations[] = $this->generateCombination($this->data);
+                $this->combinations[] = $this->ensureSalaryRange($this->generateCombination($this->data));
             }
             $combo = $this->generateCombination($this->data);
             if ($combo){
