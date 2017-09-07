@@ -186,6 +186,7 @@ class LineUpControllerNfl extends Controller
                 $this->combinations[] = $this->generateCombination($this->data);
             }
             $combo = $this->generateCombination($this->data);
+            var_dump($combo);
             if ($combo){
                 $combo = $this->ensureUnique($combo);
                 $this->combinations[] = $combo;
@@ -202,8 +203,6 @@ class LineUpControllerNfl extends Controller
         //     $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
         //     $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         //     // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
-        //     // var_dump($combo['total']);
-        //     // var_dump($combination);
         //     $this->combinations[$key] = $combo;
         // }
         return $this->combinations;
@@ -215,7 +214,6 @@ class LineUpControllerNfl extends Controller
      */
     private function ensureUnique($newCombination)
     {
-        var_dump($newCombination);
         foreach($this->combinations as $key => $combination){
             if(empty( array_diff_key($combination, $newCombination) ) ){
                 return $this->ensureUnique($this->generateCombination($this->data));
