@@ -206,7 +206,6 @@ class LineUpControllerNfl extends Controller
         //     // var_dump($combination);
         //     $this->combinations[$key] = $combo;
         // }
-        var_dump($this->combinations);
         return $this->combinations;
     }
 
@@ -216,6 +215,7 @@ class LineUpControllerNfl extends Controller
      */
     private function ensureUnique($newCombination)
     {
+        var_dump($newCombination);
         foreach($this->combinations as $key => $combination){
             if(empty( array_diff_key($combination, $newCombination) ) ){
                 return $this->ensureUnique($this->generateCombination($this->data));
