@@ -97,6 +97,7 @@ class LineUpControllerNfl extends Controller
     {
 
         $data = json_decode($request->data);
+        var_dump($data);
         $this->count = $data->lineups;
         $this->minSalary = $data->minSalary;
         $this->maxSalary = $data->maxSalary;
@@ -115,7 +116,7 @@ class LineUpControllerNfl extends Controller
             unset($players[$key]);
         }
         $this->data = $players;
-        
+
         session(['combinations' => $this->generateCombinations() ]);
 
         $ids = array_column(session('combinations'), 'ids');
