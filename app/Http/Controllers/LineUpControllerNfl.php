@@ -190,7 +190,6 @@ class LineUpControllerNfl extends Controller
                 $combo = $this->ensureUnique($combo);
                 $this->combinations[] = $combo;
             } else {
-                var_dump('wut');
                 break;
             }
 
@@ -320,6 +319,7 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
+        var_dump($combination);
         return $this->ensureSalaryRange($combination);
     }
 
