@@ -116,8 +116,6 @@ class LineUpControllerNfl extends Controller
         }
         $this->data = $players;
 
-        var_dump($players);
-
         session(['combinations' => $this->generateCombinations() ]);
 
         $ids = array_column(session('combinations'), 'ids');
@@ -239,6 +237,8 @@ class LineUpControllerNfl extends Controller
         $wr_cnt = substr_count($positions, 'WR');
         $te_cnt = substr_count($positions, 'TE');
         $dst_cnt = substr_count($positions, 'DST');
+
+        var_dump($newCombination);
 
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
