@@ -264,17 +264,10 @@ class LineUpControllerNfl extends Controller
 
         }
 
-        $rbs_cnt = 0;
-        $wrs_cnt = 0;
+        $positions = implode(', ', array_column($combination, 'position'));
+        $rbs_cnt = substr_count($positions, 'RB');
+        $wrs_cnt = substr_count($positions, 'WR');
 
-        foreach ($combination as $key => $value) {
-            if ($value['position'] == 'RB') {
-                $rbs_cnt++;
-            }
-            if ($value['position'] == 'WR') {
-                $wrs_cnt++;
-            }
-        }
         uasort($combination, function ($i, $j) {
             $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
             $a = $position_sort[$i['position']];
@@ -320,7 +313,6 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
-        var_dump($tempNames);
         return $this->ensureSalaryRange($combination);
     }
 
