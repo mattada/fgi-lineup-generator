@@ -186,7 +186,7 @@ class LineUpControllerNfl extends Controller
                 $this->combinations[] = $this->generateCombination($this->data);
             }
             $combo = $this->generateCombination($this->data);
-            var_dump($combo);
+            var_dump(count($combo));
             if ($combo){
                 $combo = $this->ensureUnique($combo);
                 $this->combinations[] = $combo;
