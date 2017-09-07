@@ -236,8 +236,6 @@ class LineUpControllerNfl extends Controller
         $te_cnt = substr_count($positions, 'TE');
         $dst_cnt = substr_count($positions, 'DST');
 
-        var_dump($newCombination);
-
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
         if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
@@ -266,10 +264,17 @@ class LineUpControllerNfl extends Controller
 
         }
 
-        $positions = implode(', ', array_column($combination, 'position'));
-        $rbs_cnt = substr_count($positions, 'RB');
-        $wrs_cnt = substr_count($positions, 'WR');
+        $rbs_cnt = 0;
+        $wrs_cnt = 0;
 
+        foreach ($combination as $key => $value) {
+            if ($value['position'] == 'RB') {
+                $rbs_cnt++;
+            }
+            if ($value['position'] == 'WR') {
+                $wrs_cnt++;
+            }
+        }
         uasort($combination, function ($i, $j) {
             $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
             $a = $position_sort[$i['position']];
@@ -315,6 +320,7 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
+        var_dump($tempNames);
         return $this->ensureSalaryRange($combination);
     }
 
