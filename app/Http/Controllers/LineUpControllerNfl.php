@@ -320,7 +320,7 @@ class LineUpControllerNfl extends Controller
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         $combination['ids'] = implode(', ', $tempIds);
 
-        // var_dump($tempNames);
+        var_dump($tempNames);
         return $this->ensureSalaryRange($combination);
     }
 
