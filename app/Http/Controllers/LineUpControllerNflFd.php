@@ -60,7 +60,8 @@ class LineUpControllerNflFd extends Controller
         }
 
        if(empty($_SERVER['HTTP_REFERER'])){
-           return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
+           // return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
+           return "You do not have access to view the lineup generator";
        }
 
        if(strpos($_SERVER['HTTP_REFERER'], "fantasygolfinsider.com") === false &&
