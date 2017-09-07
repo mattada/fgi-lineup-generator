@@ -182,9 +182,9 @@ class LineUpControllerNfl extends Controller
     private function generateCombinations()
     {
         while(count($this->combinations) < $this->count){
-            if(count($this->combinations) < 1){
-                $this->combinations[] = $this->generateCombination($this->data);
-            }
+            // if(count($this->combinations) < 1){
+            //     $this->combinations[] = $this->generateCombination($this->data);
+            // }
             $combo = $this->generateCombination($this->data);
             if ($combo){
                 $combo = $this->ensureUnique($combo);
