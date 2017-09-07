@@ -24,7 +24,8 @@ class LineUpControllerNflFd extends Controller
      * Limit of items in each combination
      *
      */
-    private $limit = 8;
+    private $limit = 9;
+    // QB, RB, RB, WR, WR, WR, TE, K, D
 
     /**
      * Number of desired combinations
@@ -49,8 +50,15 @@ class LineUpControllerNflFd extends Controller
      * @return mixed
      */
     // public function index(Request $request)
-    public function index($slate = "fd")
+    public function index($slate = "FD NFL THU-MON")
     {
+
+        if ($slate == "main") {
+            $this_slate = "FD NFL Main";
+        } else {
+            $this_slate = $slate;
+        }
+
 //        if(empty($_SERVER['HTTP_REFERER'])){
 //            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
 //        }
@@ -59,14 +67,19 @@ class LineUpControllerNflFd extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-        return view('lineups-fd')->with('slate', $slate);
+        return view('lineups-fd-nfl')->with('slate', $this_slate);
     }
 
 
-    public function players($slate = "fd")
+    public function players($slate = "FD NFL THU-MON")
     {
+        if ($slate == "main") {
+            $this_slate = "FD NFL Main";
+        } else {
+            $this_slate = $slate;
+        }
         // dd($request);
-        $slate_id = Slate::where('name', $slate)->first()->id;
+        $slate_id = Slate::where('name', $this_slate)->first()->id;
         $players = Player::where('slate_id', $slate_id)->get();
         // $players = Player::all();
 
@@ -103,7 +116,9 @@ class LineUpControllerNflFd extends Controller
             unset($players[$key]);
         }
         $this->data = $players;
+        
         session(['combinations' => $this->generateCombinations() ]);
+
         $ids = array_column(session('combinations'), 'ids');
         foreach($ids as $id){
             $idArr[] = explode(',', $id);
@@ -144,8 +159,10 @@ class LineUpControllerNflFd extends Controller
 
         $out = fopen('php://output', 'w');
 
-        $headers = ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G',];
+        // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
         // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
+
+        $headers = ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'K', 'D'];
 
         fputcsv($out, $headers);
 
@@ -178,12 +195,18 @@ class LineUpControllerNflFd extends Controller
             }
 
         }
-        foreach($this->combinations as $key => $combination){
-            $combo['names'] = implode(', ', array_column($combination, 'name'));
-            $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
-            $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
-            $this->combinations[$key] = $combo;
-        }
+        // moved to generateCombination method!!!!
+
+
+        // foreach($this->combinations as $key => $combination){
+        //     $combo['names'] = implode(', ', array_column($combination, 'name'));
+        //     $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
+        //     $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
+        //     // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
+        //     // var_dump($combo['total']);
+        //     // var_dump($combination);
+        //     $this->combinations[$key] = $combo;
+        // }
         return $this->combinations;
     }
 
@@ -204,11 +227,22 @@ class LineUpControllerNflFd extends Controller
 
     /**
      * Restricts to salary range
+     * AND also position constraints added
      *
      */
-    private function ensureSalaryRange($newCombination){
+    private function ensureSalaryRange($newCombination)
+    {
+        $positions = implode(', ', array_column($newCombination, 'position'));
+        $qb_cnt = substr_count($positions, 'QB');
+        $rb_cnt = substr_count($positions, 'RB');
+        $wr_cnt = substr_count($positions, 'WR');
+        $te_cnt = substr_count($positions, 'TE');
+        $k_cnt = substr_count($positions, 'K');
+        $dst_cnt = substr_count($positions, 'D');
+
         $total =(int) array_sum(array_column($newCombination, 'salary'));
-        if($total > $this->maxSalary || $total < $this->minSalary){
+
+        if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt != 2 || $wr_cnt != 3 || $te_cnt != 1 || $dst_cnt != 1){
             return $this->generateCombination($this->data);
         }
         return $newCombination;
@@ -232,6 +266,24 @@ class LineUpControllerNflFd extends Controller
             }
 
         }
+
+        uasort($combination, function ($i, $j) {
+            $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "K" => 5, "D" => 6];
+            $a = $position_sort[$i['position']];
+            $b = $position_sort[$j['position']];
+            if ($a == $b) return 0;
+            elseif ($a > $b) return 1;
+            else return -1;
+        });
+        // the names need to be in order of position
+        // QB, RB, RB, WR, WR, WR, TE, K, D
+        $tempNames = array_column($combination, 'name');
+        $tempIds = array_column($combination, 'draft_kings_id');
+
+        $combination['names'] = implode(', ', $tempNames);
+        $combination['total'] = (int) array_sum(array_column($combination, 'salary'));
+        // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
+        $combination['ids'] = implode(', ', $tempIds);
 
         return $this->ensureSalaryRange($combination);
     }

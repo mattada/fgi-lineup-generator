@@ -49,8 +49,14 @@ class LineUpControllerNfl extends Controller
      * @return mixed
      */
     // public function index(Request $request)
-    public function index($slate = "DK NFL Main")
+    public function index($slate = "DK NFL THU-MON")
     {
+        if ($slate == "main") {
+            $this_slate = "DK NFL Main";
+        } else {
+            $this_slate = $slate;
+        }
+
 //        if(empty($_SERVER['HTTP_REFERER'])){
 //            return "You cannot access the lineup generator directly. It must be loaded in an iFrame.";
 //        }
@@ -59,14 +65,19 @@ class LineUpControllerNfl extends Controller
 //           strpos($_SERVER['HTTP_REFERER'], "fgi.local") === false ){
 //            return "You do not have access to view the lineup generator";
 //        }
-        return view('lineups-nfl')->with('slate', $slate);
+        return view('lineups-nfl')->with('slate', $this_slate);
     }
 
 
-    public function players($slate = "DK NFL Main")
+    public function players($slate = "DK NFL THU-MON")
     {
+        if ($slate == "main") {
+            $this_slate = "DK NFL Main";
+        } else {
+            $this_slate = $slate;
+        }
         // dd($request);
-        $slate_id = Slate::where('name', $slate)->first()->id;
+        $slate_id = Slate::where('name', $this_slate)->first()->id;
         $players = Player::where('slate_id', $slate_id)->get();
         // $players = Player::all();
 
