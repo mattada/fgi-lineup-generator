@@ -242,6 +242,7 @@ class LineUpControllerNfl extends Controller
 
         if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
         // if($total > $this->maxSalary || $total < $this->minSalary){
+            var_dump($newCombination);
             return $this->generateCombination($this->data);
         }
         return $newCombination;
