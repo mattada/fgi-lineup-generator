@@ -238,8 +238,8 @@ class LineUpControllerNfl extends Controller
 
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
-        // if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
-        if($total > $this->maxSalary || $total < $this->minSalary){
+        if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
+        // if($total > $this->maxSalary || $total < $this->minSalary){
             return $this->generateCombination($this->data);
         }
         return $newCombination;
