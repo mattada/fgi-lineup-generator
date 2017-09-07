@@ -179,38 +179,21 @@ class LineUpControllerNfl extends Controller
      * Responsbile for generation all combinations
      *
      */
-    private function generateCombinations() {
-        $this->combinations = [];
-        $combo = $this->generateCombination($this->data);
+    private function generateCombinations()
+    {
+        while(count($this->combinations) < $this->count){
+            if(count($this->combinations) < 1){
+                $this->combinations[] = $this->generateCombination($this->data);
+            }
+            $combo = $this->generateCombination($this->data);
+            if ($combo){
+                $combo = $this->ensureUnique($combo);
+                $this->combinations[] = $combo;
+            } else {
+                break;
+            }
 
-        if ($combo) {
-           $this->combinations[] = $combo;
         }
-
-        while($this->combinations[]) {
-            $combo = array_pop($this->combinations);
-        }
-
-        foreach (iterator_to_array($combo) as $val) {
-          $combo = $this->ensureUnique($val);
-          if ($combo) {
-            $this->combinations[] = $combo;
-          }
-        }
-
-        // while(count($this->combinations) < $this->count) {
-        //     if (count($this->combinations) < 1){
-        //         $this->combinations[] = $this->generateCombination($this->data);
-        //     }
-        //     $combo = $this->generateCombination($this->data);
-        //     if ($combo) {
-        //         $combo = $this->ensureUnique($combo);
-        //         $this->combinations[] = $combo;
-        //     } else {
-        //         break;
-        //     }
-
-        // }
         // moved to generateCombination method!!!!
 
 
@@ -219,6 +202,8 @@ class LineUpControllerNfl extends Controller
         //     $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
         //     $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
         //     // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
+        //     // var_dump($combo['total']);
+        //     // var_dump($combination);
         //     $this->combinations[$key] = $combo;
         // }
         return $this->combinations;
@@ -280,10 +265,17 @@ class LineUpControllerNfl extends Controller
 
         }
 
-        $positions = implode(', ', array_column($combination, 'position'));
-        $wrs_cnt = substr_count($positions, 'WR');
-        $rbs_cnt = substr_count($positions, 'RB');
+        $rbs_cnt = 0;
+        $wrs_cnt = 0;
 
+        foreach ($combination as $key => $value) {
+            if ($value['position'] == 'RB') {
+                $rbs_cnt++;
+            }
+            if ($value['position'] == 'WR') {
+                $wrs_cnt++;
+            }
+        }
         uasort($combination, function ($i, $j) {
             $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
             $a = $position_sort[$i['position']];
@@ -324,7 +316,6 @@ class LineUpControllerNfl extends Controller
             $tempIds = $comboIds;
         }
 
-        // $combination['names'] = implode(', ', array_column($combination, 'name'));
         $combination['names'] = implode(', ', $tempNames);
         $combination['total'] = (int) array_sum(array_column($combination, 'salary'));
         // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
