@@ -206,6 +206,7 @@ class LineUpControllerNfl extends Controller
         //     // var_dump($combination);
         //     $this->combinations[$key] = $combo;
         // }
+        var_dump($this->combinations);
         return $this->combinations;
     }
 
@@ -237,8 +238,6 @@ class LineUpControllerNfl extends Controller
         $wr_cnt = substr_count($positions, 'WR');
         $te_cnt = substr_count($positions, 'TE');
         $dst_cnt = substr_count($positions, 'DST');
-
-        var_dump($newCombination);
 
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
