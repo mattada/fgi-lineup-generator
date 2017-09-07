@@ -236,6 +236,8 @@ class LineUpControllerNfl extends Controller
         $te_cnt = substr_count($positions, 'TE');
         $dst_cnt = substr_count($positions, 'DST');
 
+        var_dump($newCombination);
+
         $total =(int) array_sum(array_column($newCombination, 'salary'));
 
         if($total > $this->maxSalary || $total < $this->minSalary || $qb_cnt != 1 || $rb_cnt < 2 || $rb_cnt > 3 || $wr_cnt < 3 || $wr_cnt > 4 || $te_cnt < 1 || $te_cnt > 2 || $dst_cnt != 1){
