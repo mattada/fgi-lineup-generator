@@ -194,18 +194,63 @@ class LineUpControllerNfl extends Controller
             }
 
         }
-        // moved to generateCombination method!!!!
 
+        foreach($this->combinations as $key => $combination){
+            $positions = implode(', ', array_column($combination, 'position'));
+            $rbs_cnt = substr_count($positions, 'RB');
+            $wrs_cnt = substr_count($positions, 'WR');
 
-        // foreach($this->combinations as $key => $combination){
-        //     $combo['names'] = implode(', ', array_column($combination, 'name'));
-        //     $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
-        //     $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
-        //     // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
-        //     // var_dump($combo['total']);
-        //     // var_dump($combination);
-        //     $this->combinations[$key] = $combo;
-        // }
+            uasort($combination, function ($i, $j) {
+                $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
+                $a = $position_sort[$i['position']];
+                $b = $position_sort[$j['position']];
+                if ($a == $b) return 0;
+                elseif ($a > $b) return 1;
+                else return -1;
+            });
+
+            $tempNames = [];
+            $comboNames = array_column($combination, 'name');
+            $tempIds = [];
+            $comboIds = array_column($combination, 'draft_kings_id');
+            if ($wrs_cnt > 3 || $rbs_cnt > 2) {
+                $tempNames[0] = $comboNames[0];
+                $tempIds[0] = $comboIds[0];
+                $tempNames[1] = $comboNames[1];
+                $tempIds[1] = $comboIds[1];
+                $tempNames[2] = $comboNames[2];
+                $tempIds[2] = $comboIds[2];
+                // bump them all down one
+                $tempNames[3] = $comboNames[4];
+                $tempIds[3] = $comboIds[4];
+                $tempNames[4] = $comboNames[5];
+                $tempIds[4] = $comboIds[5];
+                $tempNames[5] = $comboNames[6];
+                $tempIds[5] = $comboIds[6];
+                $tempNames[6] = $comboNames[7];
+                $tempIds[6] = $comboIds[7];
+                // move $comboNames[3] into temp[7]
+                $tempNames[7] = $comboNames[3];
+                $tempIds[7] = $comboIds[3];
+                $tempNames[8] = $comboNames[8];
+                $tempIds[8] = $comboIds[8];
+            } else {
+                $tempNames = $comboNames;
+                $tempIds = $comboIds;
+            }
+
+            $combo['names'] = implode(', ', $tempNames);
+            $combo['ids'] = implode(', ', $tempIds);
+
+            
+            // $combo['names'] = implode(', ', array_column($combination, 'name'));
+            // $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
+            $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
+            // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
+            // var_dump($combo['total']);
+            // var_dump($combination);
+            $this->combinations[$key] = $combo;
+        }
         return $this->combinations;
     }
 
@@ -265,61 +310,61 @@ class LineUpControllerNfl extends Controller
 
         }
 
-        $rbs_cnt = 0;
-        $wrs_cnt = 0;
+        // $rbs_cnt = 0;
+        // $wrs_cnt = 0;
 
-        foreach ($combination as $key => $value) {
-            if ($value['position'] == 'RB') {
-                $rbs_cnt++;
-            }
-            if ($value['position'] == 'WR') {
-                $wrs_cnt++;
-            }
-        }
-        uasort($combination, function ($i, $j) {
-            $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
-            $a = $position_sort[$i['position']];
-            $b = $position_sort[$j['position']];
-            if ($a == $b) return 0;
-            elseif ($a > $b) return 1;
-            else return -1;
-        });
-        // the names need to be in order of position
-        // QB, RB, RB, WR, WR, WR, TE, FLEX, DST
-        $tempNames = [];
-        $comboNames = array_column($combination, 'name');
-        $tempIds = [];
-        $comboIds = array_column($combination, 'draft_kings_id');
-        if ($wrs_cnt > 3 || $rbs_cnt > 2) {
-            $tempNames[0] = $comboNames[0];
-            $tempIds[0] = $comboIds[0];
-            $tempNames[1] = $comboNames[1];
-            $tempIds[1] = $comboIds[1];
-            $tempNames[2] = $comboNames[2];
-            $tempIds[2] = $comboIds[2];
-            // bump them all down one
-            $tempNames[3] = $comboNames[4];
-            $tempIds[3] = $comboIds[4];
-            $tempNames[4] = $comboNames[5];
-            $tempIds[4] = $comboIds[5];
-            $tempNames[5] = $comboNames[6];
-            $tempIds[5] = $comboIds[6];
-            $tempNames[6] = $comboNames[7];
-            $tempIds[6] = $comboIds[7];
-            // move $comboNames[3] into temp[7]
-            $tempNames[7] = $comboNames[3];
-            $tempIds[7] = $comboIds[3];
-            $tempNames[8] = $comboNames[8];
-            $tempIds[8] = $comboIds[8];
-        } else {
-            $tempNames = $comboNames;
-            $tempIds = $comboIds;
-        }
+        // foreach ($combination as $key => $value) {
+        //     if ($value['position'] == 'RB') {
+        //         $rbs_cnt++;
+        //     }
+        //     if ($value['position'] == 'WR') {
+        //         $wrs_cnt++;
+        //     }
+        // }
+        // uasort($combination, function ($i, $j) {
+        //     $position_sort = ['QB' => 1, "RB" => 2, "WR" => 3, "TE" => 4, "FLEX" => 5, "DST" => 6];
+        //     $a = $position_sort[$i['position']];
+        //     $b = $position_sort[$j['position']];
+        //     if ($a == $b) return 0;
+        //     elseif ($a > $b) return 1;
+        //     else return -1;
+        // });
+        // // the names need to be in order of position
+        // // QB, RB, RB, WR, WR, WR, TE, FLEX, DST
+        // $tempNames = [];
+        // $comboNames = array_column($combination, 'name');
+        // $tempIds = [];
+        // $comboIds = array_column($combination, 'draft_kings_id');
+        // if ($wrs_cnt > 3 || $rbs_cnt > 2) {
+        //     $tempNames[0] = $comboNames[0];
+        //     $tempIds[0] = $comboIds[0];
+        //     $tempNames[1] = $comboNames[1];
+        //     $tempIds[1] = $comboIds[1];
+        //     $tempNames[2] = $comboNames[2];
+        //     $tempIds[2] = $comboIds[2];
+        //     // bump them all down one
+        //     $tempNames[3] = $comboNames[4];
+        //     $tempIds[3] = $comboIds[4];
+        //     $tempNames[4] = $comboNames[5];
+        //     $tempIds[4] = $comboIds[5];
+        //     $tempNames[5] = $comboNames[6];
+        //     $tempIds[5] = $comboIds[6];
+        //     $tempNames[6] = $comboNames[7];
+        //     $tempIds[6] = $comboIds[7];
+        //     // move $comboNames[3] into temp[7]
+        //     $tempNames[7] = $comboNames[3];
+        //     $tempIds[7] = $comboIds[3];
+        //     $tempNames[8] = $comboNames[8];
+        //     $tempIds[8] = $comboIds[8];
+        // } else {
+        //     $tempNames = $comboNames;
+        //     $tempIds = $comboIds;
+        // }
 
-        $combination['names'] = implode(', ', $tempNames);
-        $combination['total'] = (int) array_sum(array_column($combination, 'salary'));
-        // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
-        $combination['ids'] = implode(', ', $tempIds);
+        // $combination['names'] = implode(', ', $tempNames);
+        // $combination['total'] = (int) array_sum(array_column($combination, 'salary'));
+        // // $combination['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
+        // $combination['ids'] = implode(', ', $tempIds);
 
         return $this->ensureSalaryRange($combination);
     }
