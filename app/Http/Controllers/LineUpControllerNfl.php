@@ -115,7 +115,7 @@ class LineUpControllerNfl extends Controller
             unset($players[$key]);
         }
         $this->data = $players;
-        
+
         session(['combinations' => $this->generateCombinations() ]);
 
         $ids = array_column(session('combinations'), 'ids');

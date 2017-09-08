@@ -48,7 +48,7 @@ lineupGenerator.sliders.config = {
 
       var rosterCounts = {}
       var players = []
-    	
+
       payload.players.forEach((player) => {
     		if (parseInt(player.weight, 10) > 0) {
     			var p = {
@@ -72,8 +72,6 @@ lineupGenerator.sliders.config = {
         players: players,
         rosterCounts: rosterCounts,
       }
-
-      debugger
 
       $.ajax({
         method: 'POST',
