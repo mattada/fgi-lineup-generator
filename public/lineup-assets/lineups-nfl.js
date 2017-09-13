@@ -75,7 +75,7 @@ lineupGenerator.sliders.config = {
         method: 'POST',
         contentType: "application/javascript; charset=utf-8",
         crossDomain: true,
-        url: 'http://fgiapp.local/reports/lineup_generator',
+        url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
         dataType: 'json',
         error: function () {
           that.generating = false;
