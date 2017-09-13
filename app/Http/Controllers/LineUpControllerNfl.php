@@ -179,9 +179,8 @@ class LineUpControllerNfl extends Controller
      * Responsbile for generation all combinations
      *
      */
-    private function generateCombinations()
-    {
-        while(count($this->combinations) < $this->count){
+    private function generateCombinations() {
+        while(count($this->combinations) < $this->count) {
             if(count($this->combinations) < 1){
                 $this->combinations[] = $this->generateCombination($this->data);
             }
@@ -242,13 +241,7 @@ class LineUpControllerNfl extends Controller
             $combo['names'] = implode(', ', $tempNames);
             $combo['ids'] = implode(', ', $tempIds);
 
-            
-            // $combo['names'] = implode(', ', array_column($combination, 'name'));
-            // $combo['ids'] = implode(', ', array_column($combination, 'draft_kings_id'));
             $combo['total'] = (int) array_sum(array_column($combination, 'salary'));
-            // $combo['salaries'] = implode(', ', array_column($combination, 'salary'));
-            // var_dump($combo['total']);
-            // var_dump($combination);
             $this->combinations[$key] = $combo;
         }
         return $this->combinations;
