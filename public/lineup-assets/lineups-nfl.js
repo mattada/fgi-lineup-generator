@@ -73,12 +73,7 @@ lineupGenerator.sliders.config = {
 
       $.ajax({
         method: 'POST',
-        beforeSend: function(req) {
-          req.setRequestHeader("Accept", "application/json");
-          req.setRequestHeader("Content-Type", "application/json");
-          req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        },
-        url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+        url: '/lineup-generator-nfl/generate',
         dataType: 'JSON',
         error: function () {
           that.generating = false;
