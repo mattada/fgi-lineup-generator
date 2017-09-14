@@ -73,10 +73,12 @@ lineupGenerator.sliders.config = {
 
       $.ajax({
         method: 'POST',
-        contentType: "application/javascript; charset=utf-8",
-        crossDomain: true,
         url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
         dataType: 'json',
+        headers: {
+          "Accept": 'application/json',
+          "X-Requested-With": 'XMLHttpRequest'
+        },
         error: function () {
           that.generating = false;
           if (src!=="auto") {
