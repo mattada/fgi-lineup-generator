@@ -3,6 +3,7 @@
  *
  */
 var lineupGenerator = {};
+var csv_headers = 'QB,RB,RB,WR,WR,WR,TE,FLEX,DST';
 
 
 /**
@@ -22,6 +23,7 @@ lineupGenerator.sliders.config = {
     maxSalary: 50000,
     generating: false,
     lineups: 50,
+    export_data: "data:text/csvcharset=utf-8," + encodeURIComponent(csv_headers),
     totalSpots: 0,
     position: 'QB',
     change_slate_link: window.slate_global === 'DK NFL Main' ? '/lineup-generator-nfl' : '/lineup-generator-nfl/main',
@@ -69,11 +71,14 @@ lineupGenerator.sliders.config = {
         maxSalary: payload.maxSalary,
         lineups: parseInt(payload.lineups, 10),
         players: players,
+        sport: 'nfl',
+        site: 'dk'
       }
 
       $.ajax({
         method: 'POST',
-        url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+        // url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+        url: 'http://fgiapp.local/reports/lineup_generator',
         dataType: 'JSON',
         error: function () {
           that.generating = false;
@@ -83,6 +88,7 @@ lineupGenerator.sliders.config = {
         },
         success: function (response) {
           var inc = 1;
+          var csv = [];
           lineupGenerator.sliders.$data.results = [];
           var n = 0;
           var rosterCounts = {}
@@ -92,7 +98,14 @@ lineupGenerator.sliders.config = {
               if (count === rCount) rosterCounts[count] = response.rosterCounts[count]
             })
           })
+          response.combos.forEach(function(c) {
+            csv.push(c.ids)
+          });
+          csv.unshift(csv_headers);
+          csv = csv.join('\r\n');
+          lineupGenerator.sliders.$data.export_data = "data:text/csvcharset=utf-8," + encodeURIComponent(csv)
           lineupGenerator.sliders.$data.rosterCounts = rosterCounts;
+          if (response.combos < 1) alert('Warning: Infeasable to create lineups based on constraints and/or exposure specified. Please correct and try again.');
           response.combos.forEach(function (value, key) {
             setTimeout(function () {
               // value.inc = inc++;

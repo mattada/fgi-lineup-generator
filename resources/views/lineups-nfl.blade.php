@@ -39,11 +39,11 @@
     @if(true)
 
       <div style="margin: 10px 0;" class="alert alert-info" role="alert">
-        <p><strong>Heads up!</strong> The NFL version of the lineup generator will continue to get better and easier to use as the season progresses!</p>
-        <p class="initial-hide">
+        <p class="initial-hide" style="text-align: center;">
           You are viewing the <b>@{{current_slate_text}} slate</b>. Change to <a style="text-decoration: underline;" href="@{{change_slate_link}}">@{{change_slate_text}} slate</a>.
-          <p>Also consider: <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl">FanDuel NFL THU-MON slate</a> or <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p>
+          {{-- <p>Also consider: <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl">FanDuel NFL THU-MON slate</a> or <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p> --}}
         </p>
+        <h4 style="text-align: center; margin-top: 10px;">FanDuel version coming soon!</h4>
       </div>
       <header>
         <div class="filters">
@@ -103,9 +103,9 @@
                 <div v-else>
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
-                <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  <a href="/export-lus-nfl" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
-                </div>
+                {{-- <div class="pull-right button-wrapper" v-if='results.length > 0'> --}}
+                  <a href="@{{export_data}}" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
+                {{-- </div> --}}
               </div>
             </div>
           </div>
