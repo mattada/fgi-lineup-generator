@@ -96,8 +96,7 @@ class LineUpControllerNfl extends Controller
     public function generate(Request $request)
     {
 
-        // $data = json_decode($request->data);
-        $data = $request->data;
+        $data = json_decode($request->data);
         $this->count = $data->lineups;
         $this->minSalary = $data->minSalary;
         $this->maxSalary = $data->maxSalary;
