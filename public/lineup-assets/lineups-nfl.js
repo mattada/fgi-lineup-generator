@@ -73,11 +73,10 @@ lineupGenerator.sliders.config = {
 
       $.ajax({
         method: 'POST',
-        crossDomain: true,
-        headers: {
-          Accept: "application/json",
-          "X-Requested-With": 'XMLHttpRequest',
-          "Content-Type": 'application/json'
+        beforeSend: function(req) {
+          req.setRequestHeader("Accept", "application/json");
+          req.setRequestHeader("Content-Type", "application/json");
+          req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         },
         url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
         dataType: 'JSON',
