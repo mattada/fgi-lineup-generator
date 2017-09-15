@@ -54,11 +54,11 @@
             </div>
             <div class="row" style="margin-top: 5px;">
               <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Min salary:</span></div>
-              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="min-sal-crit" type="number" min="25000" max="50000" step="100" v-model='minSalary' v-on:change='update()' /></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="min-sal-crit" type="number" min="40000" max="60000" step="100" v-model='minSalary' v-on:change='update()' /></div>
             </div>
             <div class="row" style="margin-top: 5px;">
               <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max salary:</span></div>
-              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-sal-crit" type="number" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' /></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-sal-crit" type="number" min="40000" max="60000" step="100" v-model='maxSalary' v-on:change='update()' /></div>
             </div>
           </div>
           <div class="stats " style="margin-top: 10px;">
@@ -104,7 +104,7 @@
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  <a href="/export-lus-fd-nfl" download="fd_lineups.csv" class="pull-right fgi-button">Export</a>
+                  <a href="@{{export_data}}" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
             </div>

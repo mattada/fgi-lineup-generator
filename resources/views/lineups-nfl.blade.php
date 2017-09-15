@@ -103,9 +103,9 @@
                 <div v-else>
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
-                {{-- <div class="pull-right button-wrapper" v-if='results.length > 0'> --}}
+                <div class="pull-right button-wrapper" v-if='results.length > 0'>
                   <a href="@{{export_data}}" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
-                {{-- </div> --}}
+                </div>
               </div>
             </div>
           </div>
