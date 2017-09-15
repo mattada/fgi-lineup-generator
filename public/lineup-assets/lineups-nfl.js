@@ -67,8 +67,8 @@ lineupGenerator.sliders.config = {
     	})
 
       var post_data = {
-        minSalary: payload.minSalary,
-        maxSalary: payload.maxSalary,
+        minSalary: parseInt(payload.minSalary, 10),
+        maxSalary: parseInt(payload.maxSalary, 10),
         lineups: parseInt(payload.lineups, 10),
         players: players,
         sport: 'nfl',
@@ -77,8 +77,8 @@ lineupGenerator.sliders.config = {
 
       $.ajax({
         method: 'POST',
-        url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
-        // url: 'http://fgiapp.local/reports/lineup_generator',
+        // url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+        url: 'http://fgiapp.local/reports/lineup_generator',
         dataType: 'JSON',
         error: function () {
           that.generating = false;

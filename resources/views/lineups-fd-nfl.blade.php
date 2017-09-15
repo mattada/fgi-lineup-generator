@@ -39,7 +39,6 @@
     @if(true)
 
       <div style="margin: 10px 0;" class="alert alert-info" role="alert">
-        <p><strong>Heads up!</strong> The NFL version of the lineup generator will continue to get better and easier to use as the season progresses!</p>
         <p class="initial-hide">
           You are viewing the <b>@{{current_slate_text}} slate</b>. Change to <a style="text-decoration: underline;" href="@{{change_slate_link}}">@{{change_slate_text}} slate</a>.
           <p>Also consider: <a style="text-decoration: underline;" href="/lineup-generator-nfl">DraftKings NFL THU-MON slate</a> or <a style="text-decoration: underline;" href="/lineup-generator-nfl/main">DraftKings NFL Main slate</a></p>
@@ -104,7 +103,7 @@
                   <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
-                  <a href="@{{export_data}}" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>
+                  <a href="@{{export_data}}" download="fd_lineups.csv" class="pull-right fgi-button">Export</a>
                 </div>
               </div>
             </div>
