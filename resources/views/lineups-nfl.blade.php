@@ -46,7 +46,7 @@
       </div>
       <header>
         <div class="filters">
-          <div class="filter " style="margin-top: 10px;">
+          <div class="filter " style="margin-top: 10px; margin-bottom: 10px;">
             <div class="row" style="margin-top: 5px;">
               <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">No. of lineups:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="no-lineups-crit" type="number" min="1" max="150" step="1" v-model='lineups' v-on:change='update()' /></div>
@@ -58,6 +58,10 @@
             <div class="row" style="margin-top: 5px;">
               <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max salary:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-sal-crit" type="number" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' /></div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max players<br>from same team:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="5" value="3" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div>
             </div>
           </div>
           <div class="stats " style="margin-top: 10px;">
@@ -78,6 +82,37 @@
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalary}}</span></div>
               <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
+            </div>
+            <div class="row" style="margin-top: 10px;">
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Require QB Stack with:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
+                <select id="stack-positions-crit" v-model='stackPositions' v-on:change='update()'>
+                  <option value=""></option>
+                  <option value="WR,TE">WR or TE</option>
+                  <option value="WR">WR only</option>
+                  <option value="TE">TE only</option>
+                </select>
+              </div>
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><label class="pull-right" for="avoid-qbrb-crit" style="font-weight: normal;">Avoid QB/RB on same team:</label></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
+                <input style="margin-top: -1px;" id="avoid-qbrb-crit" type="checkbox" value="YES" v-model='avoidQbRb' v-on:change='update()' />
+              </div>
+            </div>
+            <div class="row" style="margin-top: 5px;">
+              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Eligible Flex Positions:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
+                <select id="flex-positions-crit" v-model='flexPositions' v-on:change='update()'>
+                  <option value="RB,WR,TE">RB,WR,TE</option>
+                  <option value="RB,WR">RB,WR</option>
+                  <option value="WR,TE">WR,TE</option>
+                  <option value="RB">RB</option>
+                  <option value="WR">WR</option>
+                </select>
+              </div>
+              <!-- <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><label class="pull-right" for="avoid-offdef-crit" style="font-weight: normal;">Avoid Offense vs Defense:</label></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
+                <input style="margin-top: -1px;" id="avoid-offdef-crit" type="checkbox" value="YES" v-model='avoidOffDef' v-on:change='update()' />
+              </div> -->
             </div>
           </div>
         </div>
@@ -100,7 +135,7 @@
                   <button class="fgi-button pull-right disabled" style="cursor: pointer;" disabled>Generating ....</button>
                 </div>
                 <div v-else>
-                  <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')">Generate</button>
+                  <button class="fgi-button pull-right" style="cursor: pointer;" v-on:click="generate('click')" :disabled="generating == 1">Generate</button>
                 </div>
                 <div class="pull-right button-wrapper" v-if='results.length > 0'>
                   <a href="@{{export_data}}" download="dk_lineups.csv" class="pull-right fgi-button">Export</a>

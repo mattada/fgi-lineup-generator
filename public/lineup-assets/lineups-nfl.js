@@ -21,7 +21,11 @@ lineupGenerator.sliders.config = {
     results: [],
     minSalary: 49000,
     maxSalary: 50000,
-    generating: false,
+    maxPlayers: 3,
+    flexPositions: "RB,WR,TE",
+    stackPositions: "WR,TE",
+    avoidQbRb: false,
+    generating: 0,
     lineups: 50,
     export_data: "data:text/csvcharset=utf-8," + encodeURIComponent(csv_headers),
     totalSpots: 0,
@@ -87,7 +91,11 @@ lineupGenerator.sliders.config = {
           minSalary: minSalary,
           maxSalary: parseInt(payload.maxSalary, 10),
           lineups: parseInt(payload.lineups, 10),
+          maxPlayers: parseInt(payload.maxPlayers, 10),
           players: players,
+          flexPositions: payload.flexPositions,
+          stackPositions: payload.stackPositions,
+          avoidQbRb: payload.avoidQbRb === "" ? false : true,
           sport: 'nfl',
           site: 'dk'
         }
@@ -97,7 +105,7 @@ lineupGenerator.sliders.config = {
           url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
           dataType: 'JSON',
           error: function () {
-            that.generating = false;
+            that.generating = 0;
             if (src!=="auto") {
               alert('Warning: Infeasable to create lineups based on constraints and/or exposure specified. Please correct and try again.');
             }
@@ -129,7 +137,7 @@ lineupGenerator.sliders.config = {
               }, n);
               n = n + 55;
             });
-            that.generating = false;
+            that.generating = 0;
           },
           data: {
             data: JSON.stringify(post_data)
@@ -137,7 +145,7 @@ lineupGenerator.sliders.config = {
         });
       } else {
         alert(errorMessages[errorMessagesKey])
-        that.generating = false;
+        that.generating = 0;
       }
     },
     setPosition: function (pos) {
