@@ -101,6 +101,17 @@
             </div>
           </div>
         </div>
+        <div class="filters">
+          <div class="filter " style="margin-top: 0px; margin-bottom: 15px;">
+            <div class="row">
+              <div style="padding: 0;" class="col-md-1 col-sm-1 col-xs-1"></div>
+              <div style="text-align: center; padding: 0;" class="col-md-10 col-sm-10 col-xs-10">
+                <small>Note: When using the stack feature be sure to assign enough exposure to a QB's pass catchers to make the desired number of combinations possible. Additionaly if using the Avoid QB/RB feature you should make sure to have enough exposure to RBs not on the same team as your QBs.</small>
+              </div>
+              <div style="padding: 0;" class="col-md-1 col-sm-1 col-xs-1"></div>
+            </div>
+          </div>
+        </div>
         <div class="actions">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
