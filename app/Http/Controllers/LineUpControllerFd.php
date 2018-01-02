@@ -24,7 +24,7 @@ class LineUpControllerFd extends Controller
      * Limit of items in each combination
      *
      */
-    private $limit = 8;
+    private $limit = 6;
 
     /**
      * Number of desired combinations
@@ -145,7 +145,8 @@ class LineUpControllerFd extends Controller
 
         $out = fopen('php://output', 'w');
 
-        $headers = ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G',];
+        // $headers = ['G', 'G', 'G', 'G', 'G', 'G', 'G', 'G',];
+        $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
         // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
 
         fputcsv($out, $headers);
@@ -268,11 +269,11 @@ class LineUpControllerFd extends Controller
     {
         $stats = [];
         $stats['totalSalaryUsed'] = array_sum(array_column(session('combinations'), 'total') );
-        $stats['totalSpots'] = count(session('combinations')) * 6;
+        $stats['totalSpots'] = count(session('combinations')) * $this->limit;
         $stats['totalSpotsUsed'] = $stats['totalSpots'];
         $stats['averageSalary'] = $stats['totalSalaryUsed'] / $stats['totalSpots'];
         $stats['totalSalaryAvailable'] = $this->maxSalary * $this->count;
-        $stats['averageSalaryRemaining'] = money_format('$%i', ($stats['totalSalaryAvailable'] - $stats['totalSalaryUsed']) / 6 );
+        $stats['averageSalaryRemaining'] = money_format('$%i', ($stats['totalSalaryAvailable'] - $stats['totalSalaryUsed']) / $this->limit );
 
         $stats['totalSalaryUsed'] = money_format('$%i', $stats['totalSalaryUsed']);
         $stats['averageSalary'] = money_format('$%i', $stats['averageSalary']);

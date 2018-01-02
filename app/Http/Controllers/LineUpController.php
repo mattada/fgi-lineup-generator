@@ -313,7 +313,7 @@ class LineUpController extends Controller
         $stats['totalSpotsUsed'] = $stats['totalSpots'];
         $stats['averageSalary'] = $stats['totalSalaryUsed'] / $stats['totalSpots'];
         $stats['totalSalaryAvailable'] = $this->maxSalary * $this->count;
-        $stats['averageSalaryRemaining'] = money_format('$%i', ($stats['totalSalaryAvailable'] - $stats['totalSalaryUsed']) / 6 );
+        $stats['averageSalaryRemaining'] = money_format('$%i', ($stats['totalSalaryAvailable'] - $stats['totalSalaryUsed']) / $this->limit );
 
         $stats['totalSalaryUsed'] = money_format('$%i', $stats['totalSalaryUsed']);
         $stats['averageSalary'] = money_format('$%i', $stats['averageSalary']);
