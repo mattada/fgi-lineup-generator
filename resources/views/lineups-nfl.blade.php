@@ -41,7 +41,7 @@
       <div style="margin: 10px 0;" class="alert alert-info" role="alert">
         <p class="initial-hide">
           You are viewing the <b>@{{current_slate_text}} slate</b>. Change to <a style="text-decoration: underline;" href="@{{change_slate_link}}">@{{change_slate_text}} slate</a>.
-          <p>Also consider: <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl">FanDuel NFL THU-MON slate</a> or <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p>
+          <p>Also consider: <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl">FanDuel NFL SUN ONLY slate</a> or <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p>
         </p>
       </div>
       <header>
