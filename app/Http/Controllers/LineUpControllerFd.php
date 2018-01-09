@@ -69,6 +69,26 @@ class LineUpControllerFd extends Controller
         // dd($request);
         $slate_id = Slate::where('name', $slate)->first()->id;
         $players = Player::where('slate_id', $slate_id)->get();
+        $new_players = [];
+        foreach($players as $player){
+            $p = explode("|", $player->name);
+            $name = $p[0];
+            if (count($p) > 1) {
+                // $time_type = $p[2];
+                $time_type = '';
+                $tee_times = $p[1];
+                $tee_arr = explode("/", $tee_times);
+                $tee_1 = $tee_arr[0];
+                if (count($tee_arr) > 1) {
+                    $tee_2 = $tee_arr[1];
+                } else {
+                    $tee_2 = '';
+                }
+                $new_players[] = ['team' => 'Golf', 'opponent' => '', 'weight' => 0, 'time_type' => $time_type, 'tee_1' => $tee_1, 'tee_2' => $tee_2, 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+            } else {
+                $new_players[] = ['team' => 'Golf', 'opponent' => '','weight' => 0, 'time_type' => '', 'tee_1' => '', 'tee_2' => '', 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+            }
+        }
         // $players = Player::all();
 
         $draft_kings_ids = array_column($players->toArray(), 'draft_kings_id');
@@ -76,7 +96,8 @@ class LineUpControllerFd extends Controller
         foreach($draft_kings_ids as $id){
             $rosterCounts[$id] = 0;
         }
-        return response()->json(['players' => $players, 'rosterCounts' => $rosterCounts ]);
+        // return response()->json(['players' => $players, 'rosterCounts' => $rosterCounts ]);
+        return response()->json(['players' => $new_players, 'rosterCounts' => $rosterCounts ]);
     }
     /**
      * Request handler
