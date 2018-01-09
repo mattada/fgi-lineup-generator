@@ -97,7 +97,11 @@ class LineUpController extends Controller
             $rosterCounts[$id] = 0;
         }
         // return response()->json(['players' => $players, 'rosterCounts' => $rosterCounts ]);
-        return response()->json(['players' => $new_players, 'rosterCounts' => $rosterCounts ]);
+        if ($slate == "pga" || $slate == "fd" || $slate == "euro") {
+            return response()->json(['players' => $new_players, 'rosterCounts' => $rosterCounts ]);
+        } else {
+            return response()->json(['players' => $players, 'rosterCounts' => $rosterCounts ]);
+        }
     }
     /**
      * Request handler
