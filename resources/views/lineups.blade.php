@@ -129,7 +129,7 @@
             </thead>
             <tbody>
               <tr v-for="player in players">
-                <td class="fgi-player-name"><span class="initial-hide">@{{player.name}} <span class="pull-right">@{{player.tee_1}}<span v-if="player.tee_2.length > 0"> / @{{player.tee_2}}</span></span></span></td>
+                <td class="fgi-player-name"><span class="initial-hide">@{{player.name}} <span class="pull-right">@{{player.tee_1}}<span v-if="player.tee_2.length > 0"> / @{{player.tee_2}}</span><span v-if="player.tee_3.length > 0"> / @{{player.tee_3}}</span></span></span></td>
                 <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
                 <td class="fgi-player-rank"><span class="initial-hide"><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
                 <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
