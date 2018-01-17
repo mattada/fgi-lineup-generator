@@ -112,10 +112,10 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
           <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
-            <div class="col-md-8 col-sm-8 col-xs-8">
+            <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].tee_4.length > 0">
               <b>Course Rotations:</b> (First day, second day, third day)
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-4">
+            <div class="pull-right col-md-4 col-sm-4 col-xs-4">
               <small class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
             </div>
           </div>
