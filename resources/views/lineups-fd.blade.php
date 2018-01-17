@@ -192,7 +192,7 @@
   <script type="text/javascript">
     window.slate_global = "{{$slate}}";
   </script>
-  <script src="/lineup-assets/lineups-fd.js"></script>
+  <script src="/lineup-assets/lineups-fd.js?_=0001"></script>
   <script>
     $(function() {
       $("#clear-exposure").on('click', function(e) {

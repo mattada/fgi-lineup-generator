@@ -196,7 +196,7 @@
   <script type="text/javascript">
     window.slate_global = "{{$slate}}";
   </script>
-  <script src="/lineup-assets/lineups.js"></script>
+  <script src="/lineup-assets/lineups.js?_=0001"></script>
   <script>
     $(function() {
       $("#clear-exposure").on('click', function(e) {
