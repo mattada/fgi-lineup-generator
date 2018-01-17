@@ -89,9 +89,14 @@ class LineUpControllerFd extends Controller
                 } else {
                     $tee_3 = '';
                 }
-                $new_players[] = ['team' => 'Golf', 'opponent' => '', 'weight' => 0, 'time_type' => $time_type, 'tee_1' => $tee_1, 'tee_2' => $tee_2, 'tee_3' => $tee_3, 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+                if (count($tee_arr) > 3) {
+                    $tee_4 = $tee_arr[3];
+                } else {
+                    $tee_4 = '';
+                }
+                $new_players[] = ['team' => 'Golf', 'opponent' => '', 'weight' => 0, 'time_type' => $time_type, 'tee_1' => $tee_1, 'tee_2' => $tee_2, 'tee_3' => $tee_3, 'tee_4' => $tee_4, 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
             } else {
-                $new_players[] = ['team' => 'Golf', 'opponent' => '','weight' => 0, 'time_type' => '', 'tee_1' => '', 'tee_2' => '', 'tee_3' => '', 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+                $new_players[] = ['team' => 'Golf', 'opponent' => '','weight' => 0, 'time_type' => '', 'tee_1' => '', 'tee_2' => '', 'tee_3' => '', 'tee_4' => '', 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
             }
         }
         // $players = Player::all();
