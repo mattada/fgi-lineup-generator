@@ -64,7 +64,7 @@
             </div>
             <div class="row" style="margin-top: 5px;">
               <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max players<br>from same team:</span></div>
-              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="5" value="3" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="7" value="5" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div>
             </div>
           </div>
           <div class="stats " style="margin-top: 10px;">

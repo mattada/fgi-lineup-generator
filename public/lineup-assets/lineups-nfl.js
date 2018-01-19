@@ -21,7 +21,7 @@ lineupGenerator.sliders.config = {
     results: [],
     minSalary: 49000,
     maxSalary: 50000,
-    maxPlayers: 3,
+    maxPlayers: 5,
     flexPositions: "RB,WR,TE",
     stackPositions: "",
     avoidQbRb: false,
