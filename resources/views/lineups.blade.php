@@ -112,14 +112,14 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
           <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
-            <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].tee_4.length > 0">
-              <b>Course Rotations:</b> (First day, second day, third day)
-            </div>
-            <div class="pull-right col-md-4 col-sm-4 col-xs-4">
+            <!-- <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].tee_4.length > 0">
+              <b>Course:</b>
+            </div> -->
+            <div class="pull-right col-md-12 col-sm-12 col-xs-12">
               <small class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
             </div>
           </div>
-          <div class="row" style="margin-top: -8px; margin-bottom: 2px;" v-if="players[0].tee_4.length > 0">
+          <!-- <div class="row" style="margin-top: -8px; margin-bottom: 2px;" v-if="players[0].tee_4.length > 0">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <small>
                 <span class="label label-success">SC</span> = Stadium, La Quinta, Nicklaus Tournament
@@ -131,7 +131,7 @@
                 <span class="label label-warning">NT</span> = Nicklaus Tournament, Stadium, La Quinta
               </small>
             </div>
-          </div>
+          </div> -->
           <table class="players">
             <thead>
               <tr>
