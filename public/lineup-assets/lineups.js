@@ -125,8 +125,8 @@ lineupGenerator.start = function () {
   $.get('/lineup-generator/players/' + window.slate_global, function (response) {
     var modified_players = response.players.map(function(player) {
       var p = player;
-      // if (p.hasOwnProperty('tee_4') && p.tee_4.length > 0) p.tee_4 = p.tee_4 + "/span>&nbsp;";
-      if (p.hasOwnProperty('tee_2') && p.tee_2.length > 0) p.tee_2 = p.tee_2 + "/span>&nbsp;";
+      if (p.hasOwnProperty('tee_4') && p.tee_4.length > 0) p.tee_4 = p.tee_4 + "/span>&nbsp;";
+      // if (p.hasOwnProperty('tee_2') && p.tee_2.length > 0) p.tee_2 = p.tee_2 + "/span>&nbsp;";
       return p;
     });
     lineupGenerator.sliders.config.data.players = modified_players;
