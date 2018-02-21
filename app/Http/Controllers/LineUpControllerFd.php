@@ -73,30 +73,20 @@ class LineUpControllerFd extends Controller
         foreach($players as $player){
             $p = explode("|", $player->name);
             $name = $p[0];
+            $tee_times = '';
+            $ownership = '';
+            $course = '';
             if (count($p) > 1) {
-                // $time_type = $p[2];
-                $time_type = '';
                 $tee_times = $p[1];
-                $tee_arr = explode("/", $tee_times);
-                $tee_1 = $tee_arr[0];
-                if (count($tee_arr) > 1) {
-                    $tee_2 = $tee_arr[1];
-                } else {
-                    $tee_2 = '';
+                if (count($p) > 2) {
+                    $ownership = $p[2];
                 }
-                if (count($tee_arr) > 2) {
-                    $tee_3 = $tee_arr[2];
-                } else {
-                    $tee_3 = '';
+                if (count($p) > 3) {
+                    $course = $p[3];
                 }
-                if (count($tee_arr) > 3) {
-                    $tee_4 = $tee_arr[3];
-                } else {
-                    $tee_4 = '';
-                }
-                $new_players[] = ['team' => 'Golf', 'opponent' => '', 'weight' => 0, 'time_type' => $time_type, 'tee_1' => $tee_1, 'tee_2' => $tee_2, 'tee_3' => $tee_3, 'tee_4' => $tee_4, 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+                $new_players[] = ['ownership' => $ownership, 'course' => $course, 'team' => 'Golf', 'opponent' => '', 'weight' => 0, 'tee_times' => $tee_times, 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
             } else {
-                $new_players[] = ['team' => 'Golf', 'opponent' => '','weight' => 0, 'time_type' => '', 'tee_1' => '', 'tee_2' => '', 'tee_3' => '', 'tee_4' => '', 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
+                $new_players[] = ['ownership' => '', 'course' => '', 'team' => 'Golf', 'opponent' => '','weight' => 0, 'tee_times' => '', 'id' => $player->id, 'position' => $player->position, 'salary' => $player->salary, 'slate_id' => $player->slate_id, 'name' => $name, 'draft_kings_id' => $player->draft_kings_id];
             }
         }
         // $players = Player::all();

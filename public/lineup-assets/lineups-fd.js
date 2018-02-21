@@ -123,12 +123,14 @@ lineupGenerator.validateFail = function () {
 lineupGenerator.start = function () {
   // show buttons and messages
   $.get('/lineup-generator-fd/players/' + window.slate_global, function (response) {
-    var modified_players = response.players.map(function(player) {
-      var p = player;
-      if (p.hasOwnProperty('tee_4') && p.tee_4.length > 0) p.tee_4 = p.tee_4 + "/span>&nbsp;";
-      return p;
-    });
-    lineupGenerator.sliders.config.data.players = modified_players;
+    // var modified_players = response.players.map(function(player) {
+    //   var p = player;
+    //   if (p.hasOwnProperty('tee_4') && p.tee_4.length > 0) p.tee_4 = p.tee_4 + "/span>&nbsp;";
+    //   // if (p.hasOwnProperty('tee_2') && p.tee_2.length > 0) p.tee_2 = p.tee_2 + "/span>&nbsp;";
+    //   return p;
+    // });
+    // lineupGenerator.sliders.config.data.players = modified_players;
+    lineupGenerator.sliders.config.data.players = response.players;
     lineupGenerator.sliders.config.data.rosterCounts = response.rosterCounts;
     lineupGenerator.sliders = new Vue(lineupGenerator.sliders.config);
     lineupGenerator.sliders.updateStats();
@@ -143,8 +145,3 @@ $(function () {
   //     leaveClass: 'bounceOutLeft'
   // });
 });
-
-
-
-
-

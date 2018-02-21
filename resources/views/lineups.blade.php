@@ -112,8 +112,7 @@
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
           <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
-            <!-- <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].tee_4.length > 0"> -->
-            <!-- <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].tee_2.length > 0"> -->
+            <!-- <div class="col-md-8 col-sm-8 col-xs-8" v-if="players[0].course.length > 0"> -->
               <!-- <b>Course Rotations:</b> (First day, second day, third day) -->
               <!-- <b>Course:</b>
             </div> -->
@@ -121,8 +120,7 @@
               <small class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
             </div>
           </div>
-          <!-- <div class="row" style="margin-top: -8px; margin-bottom: 2px;" v-if="players[0].tee_4.length > 0"> -->
-          <!-- <div class="row" style="margin-top: -8px; margin-bottom: 2px;" v-if="players[0].tee_2.length > 0"> -->
+          <!-- <div class="row" style="margin-top: -8px; margin-bottom: 2px;" v-if="players[0].course.length > 0"> -->
             <!-- <div class="col-md-12 col-sm-12 col-xs-12"> -->
               <!-- <small style="display: block; margin-bottom: 5px;">
                 <span class="label label-success">PB</span> = Pebble Beach, Spyglass Hill, Monterey Peninsula
@@ -157,8 +155,7 @@
             </thead>
             <tbody>
               <tr v-for="player in players">
-                <td class="fgi-player-name" style="width: 55%;"><span v-if="player.tee_4.length > 0" v-html="player.tee_4"></span><span class="initial-hide">@{{player.name}} <span class="pull-right" style="font-size: 95%;">@{{player.tee_1}}<span v-if="player.tee_2.length > 0"> / @{{player.tee_2}}</span></span></span></td>
-                <!-- <td class="fgi-player-name" style="width: 55%;"><span v-if="player.tee_2.length > 0" v-html="player.tee_2"></span><span class="initial-hide">@{{player.name}} <span class="pull-right" style="font-size: 95%;">@{{player.tee_1}}</span></span></td> -->
+                <td class="fgi-player-name" style="width: 55%;"><span style="margin-right: 2px;" v-if="player.course.length > 0" v-html="player.course"></span><span class="initial-hide">@{{player.name}}<span style="font-size: 80%; margin-left: 5px;" v-if="player.ownership.length > 0"> @{{player.ownership}}%</span> <span class="pull-right" style="font-size: 95%;">@{{player.tee_times}}</span></span></td>
                 <td class="fgi-player-salary"><span class="initial-hide">$@{{player.salary}}</span></td>
                 <td class="fgi-player-rank"><span class="initial-hide"><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
                 <td><span class="initial-hide">@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
