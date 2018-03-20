@@ -104,8 +104,7 @@ lineupGenerator.sliders.config = {
 
         $.ajax({
           method: 'POST',
-          // url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
-          url: 'http://fgiapp.local/reports/lineup_generator',
+          url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
           dataType: 'JSON',
           error: function () {
             that.generating = 0;
