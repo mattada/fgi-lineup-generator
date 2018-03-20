@@ -3,7 +3,8 @@
  *
  */
 var lineupGenerator = {};
-var csv_headers = 'QB,RB,RB,WR,WR,WR,TE,FLEX,DST';
+// var csv_headers = 'QB,RB,RB,WR,WR,WR,TE,FLEX,DST';
+var csv_headers = 'G,G,G,G,G,G';
 
 
 /**
@@ -19,17 +20,17 @@ lineupGenerator.sliders.config = {
   el: '#fgi-app',
   data: {
     results: [],
-    minSalary: 49000,
+    minSalary: 49500,
     maxSalary: 50000,
-    maxPlayers: 5,
+    maxPlayers: 3,
     flexPositions: "RB,WR,TE",
     stackPositions: "",
     avoidQbRb: false,
     generating: 0,
-    lineups: 50,
+    lineups: 20,
     export_data: "data:text/csvcharset=utf-8," + encodeURIComponent(csv_headers),
     totalSpots: 0,
-    position: 'QB',
+    position: 'G',
     change_slate_link: window.slate_global === 'DK NFL Main' ? '/lineup-generator-nfl' : '/lineup-generator-nfl/main',
     change_slate_text: window.slate_global === 'DK NFL Main' ? 'DraftKings NFL THU-MON' : 'DraftKings NFL Main',
     current_slate_text: window.slate_global === 'DK NFL Main' ? 'DraftKings NFL Main' : 'DraftKings NFL THU-MON',
@@ -96,13 +97,15 @@ lineupGenerator.sliders.config = {
           flexPositions: payload.flexPositions,
           stackPositions: payload.stackPositions,
           avoidQbRb: payload.avoidQbRb === "" ? false : true,
-          sport: 'nfl',
+          // sport: 'nfl',
+          sport: 'golf',
           site: 'dk'
         }
 
         $.ajax({
           method: 'POST',
-          url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+          // url: 'https://apps.fantasygolfinsider.com/reports/lineup_generator',
+          url: 'http://fgiapp.local/reports/lineup_generator',
           dataType: 'JSON',
           error: function () {
             that.generating = 0;
@@ -167,7 +170,7 @@ lineupGenerator.sliders.config = {
       var sumSpots = 0;
       var sumSalary = 0;
 
-      var totalSpots = 9 * this.lineups;
+      var totalSpots = 6 * this.lineups;
       this.players.forEach( function (value, index){
          if(value.totalSpots){
           sumSpots = sumSpots + parseInt(value.totalSpots,10);

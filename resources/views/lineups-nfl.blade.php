@@ -38,15 +38,15 @@
     {{--@if(Auth::check() and Auth::User()->can('view-page', 'lineup-generator'))--}}
     @if(true)
 
-      <div style="margin: 10px 0;" class="alert alert-info" role="alert">
+      <!-- <div style="margin: 10px 0;" class="alert alert-info" role="alert">
         <p class="initial-hide">
-          You are viewing the <b>@{{current_slate_text}} slate</b>.
+          You are viewing the <b>@{{current_slate_text}} slate</b>. -->
           <!-- Change to <a style="text-decoration: underline;" href="@{{change_slate_link}}">@{{change_slate_text}} slate</a>. -->
-          <p>Also consider:
+          <!-- <p>Also consider: -->
             <!-- <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl">FanDuel NFL THU-MON slate</a> or  -->
-            <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p>
+            <!-- <a style="text-decoration: underline;" href="/lineup-generator-fd-nfl/main">FanDuel NFL Main slate</a></p>
         </p>
-      </div>
+      </div> -->
       <header>
         <div class="filters">
           <div class="filter " style="margin-top: 10px; margin-bottom: 10px;">
@@ -63,8 +63,10 @@
               <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input style="border: 1px solid #ccc; padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-sal-crit" type="number" min="25000" max="50000" step="100" v-model='maxSalary' v-on:change='update()' /></div>
             </div>
             <div class="row" style="margin-top: 5px;">
-              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max players<br>from same team:</span></div>
-              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="7" value="5" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div>
+              <!-- <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max players<br>from same team:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="7" value="5" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div> -->
+              <div style="padding: 0;" class="col-md-8 col-sm-8 col-xs-8"><span class="pull-right" style="margin-top: 4px;">Max players<br>from same group:</span></div>
+              <div style="padding: 0; padding-left: 5px;" class="col-md-4 col-sm-4 col-xs-4"><input type="number" min="1" max="3" value="1" style="padding: 2px 5px; margin-left: 10px; width: 75px;" id="max-players-crit" v-model='maxPlayers' v-on:change='update()' /></div>
             </div>
           </div>
           <div class="stats " style="margin-top: 10px;">
@@ -86,7 +88,7 @@
               <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Avg Salary Remain / Player:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2"><span class="initial-hide">@{{averageSalaryRemaining}}</span></div>
             </div>
-            <div class="row" style="margin-top: 10px;">
+            <!-- <div class="row" style="margin-top: 10px;">
               <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Require QB Stack with:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
                 <select id="stack-positions-crit" v-model='stackPositions' v-on:change='update()'>
@@ -100,9 +102,9 @@
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
                 <input style="margin-top: -1px;" id="avoid-qbrb-crit" type="checkbox" value="YES" v-model='avoidQbRb' v-on:change='update()' />
               </div>
-            </div>
+            </div> -->
             <div class="row" style="margin-top: 5px;">
-              <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Eligible Flex Positions:</span></div>
+              <!-- <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><span class="pull-right">Eligible Flex Positions:</span></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
                 <select id="flex-positions-crit" v-model='flexPositions' v-on:change='update()'>
                   <option value="RB,WR,TE">RB,WR,TE</option>
@@ -111,7 +113,7 @@
                   <option value="RB">RB</option>
                   <option value="WR">WR</option>
                 </select>
-              </div>
+              </div> -->
               <!-- <div style="padding: 0;" class="col-md-4 col-sm-4 col-xs-4"><label class="pull-right" for="avoid-offdef-crit" style="font-weight: normal;">Avoid Offense vs Defense:</label></div>
               <div style="padding: 0; padding-left: 5px;" class="col-md-2 col-sm-2 col-xs-2">
                 <input style="margin-top: -1px;" id="avoid-offdef-crit" type="checkbox" value="YES" v-model='avoidOffDef' v-on:change='update()' />
@@ -119,7 +121,7 @@
             </div>
           </div>
         </div>
-        <div class="filters">
+        <!-- <div class="filters">
           <div class="filter " style="margin-top: 0px; margin-bottom: 15px;">
             <div class="row">
               <div style="padding: 0;" class="col-md-1 col-sm-1 col-xs-1"></div>
@@ -129,7 +131,7 @@
               <div style="padding: 0;" class="col-md-1 col-sm-1 col-xs-1"></div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="actions">
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
@@ -162,7 +164,7 @@
 
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="players-wrapper">
-          <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
+          <!-- <div class="row" style="margin-top: -8px; margin-bottom: 2px;">
             <div class="col-xs-8">
               <ul class="nav nav-pills" style="font-size: 90%; margin-top: 10px; margin-bottom: 5px;">
                 <li v-bind:class="{ active: position === 'QB'}" role="presentation"><a style="cursor: pointer; padding: 5px 10px" v-on:click="setPosition('QB')">QB</a></li>
@@ -175,7 +177,7 @@
             <div class="col-xs-4">
               <small style="margin-top: 15px;" class="pull-right"><a href="#" id="clear-exposure" v-on:click="clear()">[X] Clear Exposure</a></small>
             </div>
-          </div>
+          </div> -->
           <table class="players">
             <thead>
               <tr>
@@ -189,7 +191,8 @@
             </thead>
             <tbody class="initial-hide-td-spans">
               <tr v-for="player in players | filterBy position in 'position'">
-                <td class="fgi-player-name"><span>@{{player.name}} (@{{player.position}}-@{{player.team}})</span></td>
+                <!-- <td class="fgi-player-name"><span>@{{player.name}} (@{{player.position}}-@{{player.team}})</span></td> -->
+                <td class="fgi-player-name"><span>@{{player.name}} (@{{player.team}})</span></td>
                 <td class="fgi-player-salary"><span>$@{{player.salary}}</span></td>
                 <td class="fgi-player-rank"><span><input class="exposure-item" v-on:change='update()' style="font-size: 12px; text-align:center; width:55px; height: 20px; border:1px solid #979797;" min="0" v-model="player.weight" type="number"></span></td>
                 <td><span>@{{player.totalSpots = ((player.weight/100) * lineups).toFixed(1)}}</span></td>
