@@ -211,8 +211,8 @@ class LineUpController extends Controller
 
         $out = fopen('php://output', 'w');
 
-        $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
-        // $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
+        // $headers = ['G', 'G', 'G', 'G', 'G', 'G',];
+        $headers = ['WG', 'WG', 'WG', 'WG', 'WG', 'WG', '', 'Instructions'];
 
         fputcsv($out, $headers);
 
